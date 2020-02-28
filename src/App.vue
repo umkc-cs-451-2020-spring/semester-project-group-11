@@ -48,7 +48,7 @@ $active: #ffd700;
 body {
   margin: 0;
   padding: 0;
-  background: $blue-1;
+  background: #011f2b;
   // Firefox
   :focus {outline:none;}
   ::-moz-focus-inner {border:0;}
@@ -59,13 +59,12 @@ body {
   position: absolute;
 
   .left {
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
     top: 0;
     width: $leftWidth;
-    background: $dark;
-
+    background-image: linear-gradient(to bottom, #05668d, #02c39a);
     .logo {
       position: relative;
       width: $leftWidth/2;
