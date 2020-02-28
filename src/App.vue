@@ -28,6 +28,14 @@ export default {
           link: '/'
         },
         {
+          name: 'Palette',
+          link: '/palette'
+        },
+        {
+          name: 'Form Fields',
+          link: 'form-fields'
+        },
+        {
           name: 'About',
           link: '/about'
         }
@@ -38,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss">
-$leftWidth: 10rem;
+$leftWidth: 15rem;
 $dark: #1b262c;
 $blue-1: #022c43;
 $blue-2: #053f5e;

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Palette from '../views/Palette.vue'
+import FormFields from '../views/FormFields.vue'
+
 
 Vue.use(VueRouter)
 
@@ -9,6 +12,16 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/palette',
+    name: 'Palette',
+    component: Palette
+  },
+  {
+    path: '/form-fields',
+    name: 'Form Fields',
+    component: FormFields
   },
   {
     path: '/about',
