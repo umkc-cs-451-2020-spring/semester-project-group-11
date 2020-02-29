@@ -6,8 +6,8 @@
 			<dropdown :options="dropdownOptions">
 			</dropdown>
 			<div class="button-group">
-				<button>CANCEL</button>
-				<button type="submit">SUBMIT</button>
+				<app-button>CANCEL</app-button>
+				<app-button type="submit">SUBMIT</app-button>
 			</div>
 		</form>
 	</div>
@@ -15,11 +15,13 @@
 
 <script>
 import Dropdown from '../components/Dropdown.vue'
+import AppButton from '../components/AppButton.vue'
 
 export default {
 	name: 'FormFields',
 	components: {
-		Dropdown
+		Dropdown,
+		AppButton
 	},
 	data() {
 		return {
@@ -81,20 +83,6 @@ $fieldHeight: 2.5rem;
 		.button-group {
 			display: flex;
 			justify-content: space-between;
-		}
-		button {
-			border-radius: .75rem;
-			border: none;
-			background: #02c39a;
-			height: 1 + $fieldHeight;
-			width: 10rem;
-			color: whitesmoke;
-			font-size: 1.25rem;
-			font-weight: bold;
-			padding: .5rem;
-		}
-		button:hover {
-			background-image: linear-gradient(150deg, #05668d, #02c39a);
 		}
 	}
 }
