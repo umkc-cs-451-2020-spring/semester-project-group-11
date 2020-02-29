@@ -3,6 +3,8 @@
 		<form>
 			<input type="text" placeholder="Username">
 			<input type="password" placeholder="Password">
+			<dropdown :options="dropdownOptions">
+			</dropdown>
 			<div class="button-group">
 				<button>CANCEL</button>
 				<button type="submit">SUBMIT</button>
@@ -12,11 +14,26 @@
 </template>
 
 <script>
-
+import Dropdown from '../components/Dropdown.vue'
 
 export default {
 	name: 'FormFields',
 	components: {
+		Dropdown
+	},
+	data() {
+		return {
+			dropdownOptions: [
+				{
+					name: 'Hello',
+					code: 1
+				},
+				{
+					name: 'World',
+					code: 2
+				}
+			]
+		}
 	}
 }
 </script>
@@ -36,6 +53,7 @@ $fieldHeight: 2.5rem;
 			color: whitesmoke;
 			border-radius: .5rem;
 			border-color: transparent;
+			border-style: solid;
 			background: #002f3f;
 			width: 30rem;
 			height: $fieldHeight;
@@ -46,6 +64,19 @@ $fieldHeight: 2.5rem;
 			outline-offset: 0;
 			border-color: #02c39a;
 			border-radius: .5rem;
+		}
+		select {
+			color: whitesmoke;
+			border-radius: .5rem;
+			border-color: transparent;
+			border-style: solid;
+			background: #002f3f;
+			width: 30rem;
+			height: 1 + $fieldHeight;
+			padding: .5rem 2rem;
+			font-size: 1.5rem;
+		}
+		select:focus {
 		}
 		.button-group {
 			display: flex;
