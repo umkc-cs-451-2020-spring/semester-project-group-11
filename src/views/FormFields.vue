@@ -3,6 +3,7 @@
 		<form>
 			<input type="text" placeholder="Username">
 			<input type="password" placeholder="Password">
+			<textarea></textarea>
 			<dropdown :options="dropdownOptions">
 			</dropdown>
 			<div class="button-group">
@@ -61,6 +62,18 @@ $fieldHeight: 2.5rem;
 			height: $fieldHeight;
 			padding: .5rem 2rem;
 			font-size: 1.5rem;
+		}
+		textarea {
+			width: 30rem;
+			height: 15rem;
+			background: #002f3f;
+			padding: .5rem 2rem;
+			border-radius: .5rem;
+			border-color: transparent;
+			border-style: solid;
+		}
+		textarea:focus {
+			border: 2px solid #02c39a;
 		}
 		input:focus {
 			outline-offset: 0;
