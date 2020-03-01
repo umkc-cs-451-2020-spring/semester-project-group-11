@@ -61,6 +61,15 @@ body {
   :focus {outline:none;}
   ::-moz-focus-inner {border:0;}
 }
+h1 {
+  font-size: 3.5rem;
+  color: #02c39a;
+  margin: 0;
+}
+#page {
+    padding: 2rem;
+}
+
 #app {
   width: 100vw;
   height: 100vh;

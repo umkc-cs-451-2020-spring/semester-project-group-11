@@ -1,10 +1,10 @@
 <template>
-	<div id="palette">
+	<div id="page">
 		<div class="box-container">
-			<div class="box" style="background: #002f3f"></div>
-			<div class="box" style="background: #05668d"></div>
-			<div class="box" style="background: #02c39a"></div>
-			<div class="box" style="background: #ffd700"></div>
+			<div class="box" style="background: #002f3f; color: white">#002f3f</div>
+			<div class="box" style="background: #05668d; color: white">#05668d</div>
+			<div class="box" style="background: #02c39a; color: white">#02c39a</div>
+			<div class="box" style="background: #ffd700; color: white">#ffd700</div>
 		</div>
 
 
@@ -39,10 +39,6 @@ export default {
 
 <style lang="scss">
 $blue-3: #115173;
-
-#palette {
-	padding: 2rem;
-}
 
 .grid-container {
 	display: grid;

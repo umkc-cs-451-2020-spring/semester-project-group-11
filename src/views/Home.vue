@@ -1,6 +1,8 @@
 <template>
-	<div id="home">
-		<card></card>
+	<div id="page">
+		<h1>Home</h1>
+		<card height="20rem"></card>
+		<card height="20rem"></card>
 	</div>
 </template>
 
@@ -17,7 +19,4 @@ export default {
 </script>
 
 <style lang="scss">
-#home {
-	padding: 2rem;
-}
 </style>

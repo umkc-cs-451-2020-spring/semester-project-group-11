@@ -2,14 +2,14 @@
 	<div class="custom-select-wrapper">
 		<div class="custom-select">
 			<div class="custom-select__trigger">
-				<span>Tesla</span>
+				<span class="placeholder">{{placeholder}}</span>
 				<div class="arrow">
 			</div>
 		</div>
 		<div class="custom-options">
-			<span class="custom-option selected" data-value="tesla">Tesla</span>
-			<span class="custom-option" data-value="volvo">Volvo</span>
-			<span class="custom-option" data-value="mercedes">Mercedes</span>
+			<span v-for="(option, index) in options" :key="index" data-value="option.code" class="custom-option">
+				{{option.name}}
+			</span>
 		</div>
 	</div>
 	</div>
@@ -23,6 +23,9 @@ export default {
 	props: {
 		options: {
 			required: true
+		},
+		placeholder: {
+			default: 'Select...'
 		}
 	},
 
@@ -34,11 +37,12 @@ export default {
 
 		for (const option of document.querySelectorAll(".custom-option")) {
 			option.addEventListener('click', function() {
-				if (!this.classList.contains('selected')) {
-					this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
-					this.classList.add('selected');
-					this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
-				}
+				if (option.parentNode.querySelector('.custom-option.selected')) 
+					option.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+
+				option.classList.add('selected');
+				option.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
+				option.closest('.custom-select').querySelector('.custom-select__trigger span').classList.remove('placeholder');
 			})
 		}
 
@@ -71,7 +75,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.placeholder {
+	color: rgb(64, 100, 115)
+}
 .custom-select-wrapper {
 	position: relative;
 	user-select: none;

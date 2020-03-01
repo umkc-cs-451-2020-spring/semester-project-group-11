@@ -1,5 +1,5 @@
 <template>
-	<div class="card">
+	<div class="card" :style="stylish">
 		<slot></slot>
 	</div>
 </template>
@@ -8,14 +8,36 @@
 
 export default {
 	name: 'Card',
-	components: {}
+	components: {},
+	props: {
+		width: {
+			default: '100%'
+		},
+		height: {
+			default: '10rem'
+		}
+	},
+
+	mounted() {
+		console.log(this.width)
+		console.log(this.stylish)
+	},
+
+	computed: {
+		stylish() {
+			return {
+				width: this.width,
+				height: this.height
+			}
+		}
+	}
 }
 </script>
 
 <style lang="scss">
 .card {
-	height: 20rem;
-	width: 75%;
+	min-height: 1rem;
+	min-width: 1rem;
 	background: #002f3f;
 	border-radius: .75rem;
 	padding: .5rem;
