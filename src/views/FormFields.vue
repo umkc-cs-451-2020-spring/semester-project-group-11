@@ -68,9 +68,11 @@ form {
 		border-radius: .5rem;
 		border-color: transparent;
 		border-style: solid;
+		font-size: 1.5rem;
 	}
 	textarea:focus {
 		border: 2px solid #02c39a;
+		color: whitesmoke;
 	}
 	input:focus {
 		outline-offset: 0;
