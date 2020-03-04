@@ -53,6 +53,9 @@ $blue-2: #053f5e;
 $blue-3: #115173;
 $active: #ffd700;
 
+h1 {
+  color: #02c39a
+}
 body {
   margin: 0;
   padding: 0;

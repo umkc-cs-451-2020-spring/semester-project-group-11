@@ -1,19 +1,36 @@
 <template>
 	<div id="page">
 		<h1>Home</h1>
-		<card height="20rem"></card>
-		<card height="20rem"></card>
+		<schedule></schedule>
 	</div>
 </template>
 
 <script>
 
-import Card from '@/components/Card.vue'
+import Schedule from '@/components/Schedule.vue'
 
 export default {
 	name: 'Home',
 	components: {
-		Card
+		Schedule
+	},
+	data() {
+		return {
+			professors: [
+				{
+					name: 'Hare',
+				},
+				{
+					name: 'Bingham',
+				},
+				{
+					name: 'Kuhail',
+				},
+				{
+					name: 'Roa',
+				}
+			]
+		}
 	}
 }
 </script>
