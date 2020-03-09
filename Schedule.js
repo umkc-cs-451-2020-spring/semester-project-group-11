@@ -1,4 +1,5 @@
 var Course = require("./Course");
+var TimeProfessorViolation = require("./TimeProfessorViolation");
 var TimeRoomViolation = require("./TimeRoomViolation");
 
 class Schedule {
@@ -11,9 +12,32 @@ class Schedule {
     var course = new Course(id, professor, time, room);
     var s = this;
     this.courses.forEach(function(item) {
-      s.check_timeRoom(course, item);
+      s.check_violations(course, item);
     });
     this.courses.push(course);
+  }
+
+  check_violations(new_course, check_course) {
+    var s = this;
+    s.check_timeProfessor(new_course, check_course);
+    s.check_timeRoom(new_course, check_course);
+  }
+
+  check_timeProfessor(new_course, check_course) {
+    if (
+      new_course.get_time() == check_course.get_time() &&
+      new_course.get_professor() == check_course.get_professor()
+    ) {
+      this.violations.push(
+        new TimeProfessorViolation(
+          new_course.get_time(),
+          new_course.get_professor(),
+          new_course,
+          check_course,
+          3
+        )
+      );
+    }
   }
 
   check_timeRoom(new_course, check_course) {
@@ -40,8 +64,10 @@ class Schedule {
   }
 
   print_schedule_violations() {
+    console.log("VIOLATIONS");
+    console.log("==========");
     this.violations.forEach(function(item) {
-      item.print_violation();
+      console.log(item.print_violation());
     });
   }
 }

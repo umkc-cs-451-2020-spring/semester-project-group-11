@@ -1,7 +1,7 @@
-class TimeRoomViolation {
-  constructor(time, room, course1, course2, weight) {
+class TimeProfessorViolation {
+  constructor(time, professor, course1, course2, weight) {
     this.time = time;
-    this.room = room;
+    this.professor = professor;
     this.course1 = course1;
     this.course2 = course2;
     this.weight = weight;
@@ -9,15 +9,15 @@ class TimeRoomViolation {
 
   print_violation() {
     console.log(
-      "Violation Type: Time-Room" +
+      "Violation Type: Time-Professor" +
         "\nCourse 1: " +
         this.course1.get_courseid() +
         "\nCourse 2: " +
         this.course2.get_courseid() +
         "\nTime: " +
         this.time +
-        "\nRoom: " +
-        this.room +
+        "\nProfessor: " +
+        this.professor +
         "\nWeight: " +
         this.weight
     );
@@ -33,4 +33,4 @@ class TimeRoomViolation {
   }
 }
 
-module.exports = TimeRoomViolation;
+module.exports = TimeProfessorViolation;
