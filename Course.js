@@ -16,12 +16,27 @@ class Course {
       "Course: " +
         this.courseid +
         "\nProfessor: " +
-        this.professor +
+        this.professor.get_lastname() +
         "\nTime: " +
-        this.time +
+        this.print_time() +
         "\nRoom: " +
         this.room
     );
+  }
+
+  print_time() {
+    var str = (this.time / 100).toFixed(2).toString();
+    var split = str.split('.');
+    if (this.time < 1200) {
+      var suffix = "am"
+    }
+    else {
+      if (split[0] != 12) {
+        split[0] -= 12
+      }
+      var suffix = "pm"
+    }
+    return split[0] + ":" + split[1] + suffix;
   }
 
   // Getters & Setters

@@ -1,4 +1,6 @@
+var Professor = require("./Professor");
 var Course = require("./Course");
+var MarriageViolation = require("./MarriageViolation");
 var TimeProfessorViolation = require("./TimeProfessorViolation");
 var TimeRoomViolation = require("./TimeRoomViolation");
 
@@ -11,10 +13,35 @@ class Schedule {
   add_course(id, professor, time, room) {
     var course = new Course(id, professor, time, room);
     var s = this;
+    if (professor.is_married()) {
+      // check if their spouse has a class scheduled within an hour of this class
+      var check_spouse = professor.get_spouse();
+      this.courses.forEach(function(item) {
+        if (item.get_professor() == check_spouse) {
+          s.check_marriage(course, item);
+        }
+      })
+    }
     this.courses.forEach(function(item) {
       s.check_violations(course, item);
     });
     this.courses.push(course);
+  }
+  
+  add_marriage(professor1, professor2) {
+    professor1.add_marriage(professor2);
+    professor2.add_marriage(professor1);
+  }
+
+  remove_marriage(professor) {
+    if (professor.is_married()) {
+      spouse = professor.get_spouse();
+      professor.remove_marriage();
+      spouse.remove_marriage();
+    }
+    else {
+      console.log("Professor " + professor.get_lastname() + " is not married.");
+    }
   }
 
   check_violations(new_course, check_course) {
@@ -30,7 +57,6 @@ class Schedule {
     ) {
       this.violations.push(
         new TimeProfessorViolation(
-          new_course.get_time(),
           new_course.get_professor(),
           new_course,
           check_course,
@@ -47,11 +73,24 @@ class Schedule {
     ) {
       this.violations.push(
         new TimeRoomViolation(
-          new_course.get_time(),
           new_course.get_room(),
           new_course,
           check_course,
           3
+        )
+      );
+    }
+  }
+
+  check_marriage(new_course, check_course) {
+    if ((Math.abs(check_course.get_time() - new_course.get_time())) <= 100) {
+      this.violations.push(
+        new MarriageViolation(
+          new_course.get_professor(),
+          check_course.get_professor(),
+          new_course,
+          check_course,
+          5 
         )
       );
     }
@@ -64,11 +103,13 @@ class Schedule {
   }
 
   print_schedule_violations() {
-    console.log("VIOLATIONS");
-    console.log("==========");
-    this.violations.forEach(function(item) {
-      console.log(item.print_violation());
-    });
+    if (this.violations.length > 0) {
+      console.log("VIOLATIONS");
+      console.log("==========");
+      this.violations.forEach(function(item) {
+        console.log(item.print_violation());
+      });
+    }
   }
 }
 

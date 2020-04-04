@@ -1,6 +1,5 @@
 class TimeProfessorViolation {
-  constructor(time, professor, course1, course2, weight) {
-    this.time = time;
+  constructor(professor, course1, course2, weight) {
     this.professor = professor;
     this.course1 = course1;
     this.course2 = course2;
@@ -15,9 +14,9 @@ class TimeProfessorViolation {
         "\nCourse 2: " +
         this.course2.get_courseid() +
         "\nTime: " +
-        this.time +
+        this.course1.print_time() +
         "\nProfessor: " +
-        this.professor +
+        this.professor.get_lastname() +
         "\nWeight: " +
         this.weight
     );

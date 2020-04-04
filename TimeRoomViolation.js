@@ -1,6 +1,5 @@
 class TimeRoomViolation {
-  constructor(time, room, course1, course2, weight) {
-    this.time = time;
+  constructor(room, course1, course2, weight) {
     this.room = room;
     this.course1 = course1;
     this.course2 = course2;
@@ -15,7 +14,7 @@ class TimeRoomViolation {
         "\nCourse 2: " +
         this.course2.get_courseid() +
         "\nTime: " +
-        this.time +
+        this.course1.print_time() +
         "\nRoom: " +
         this.room +
         "\nWeight: " +
