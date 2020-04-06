@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Palette from '../views/Palette.vue'
-import FormFields from '../views/FormFields.vue'
 import Scheduler from "../views/Scheduler";
+import Professors from "../views/Professors";
+import Courses from "../views/Courses";
 
 
 Vue.use(VueRouter)
@@ -15,28 +16,25 @@ const routes = [
     component: Home
   },
   {
-    path: '/palette',
-    name: 'Palette',
-    component: Palette
-  },
-  {
-    path: '/form-fields',
-    name: 'Form Fields',
-    component: FormFields
-  },
-  {
     path: '/scheduler',
     name: 'Scheduler',
     component: Scheduler
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/professors',
+    name: 'Professors',
+    component: Professors
+  },
+  {
+    path: '/courses',
+    name: 'Courses',
+    component: Courses
+  },
+  {
+    path: '/palette',
+    name: 'Palette',
+    component: Palette
+  },
 ]
 
 const router = new VueRouter({

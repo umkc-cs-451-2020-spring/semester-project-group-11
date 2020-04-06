@@ -12,20 +12,6 @@ export default {
 	},
 	data() {
 		return {
-			professors: [
-				{
-					name: 'Hare',
-				},
-				{
-					name: 'Bingham',
-				},
-				{
-					name: 'Kuhail',
-				},
-				{
-					name: 'Roa',
-				}
-			]
 		}
 	}
 }

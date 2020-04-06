@@ -1,18 +1,26 @@
 <template>
     <div id="page">
-        <h1>Scheduler</h1>
+        <div class="head">
+            <h1>Scheduler</h1>
+            <div class="button-group" style>
+                <div></div>
+                <app-button>ADD COURSE</app-button>
+            </div>
+        </div>
         <vue-scheduler
             :events="events"
+            :disable-dialog="true"
         ></vue-scheduler>
     </div>
 </template>
 
 <script>
-
+    import AppButton from "../components/AppButton";
 
     export default {
         name: 'Scheduler',
         components: {
+            AppButton
         },
         data() {
             return {
