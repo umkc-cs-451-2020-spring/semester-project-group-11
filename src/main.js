@@ -7,8 +7,16 @@ Vue.config.productionTip = false
 
 // Plugins
 import VueScheduler from 'v-calendar-scheduler'
-import 'v-calendar-scheduler/lib/main.css'
-Vue.use(VueScheduler)
+Vue.use(VueScheduler, {
+  minDate: null,
+  maxDate: null,
+  timeRange: [8, 18],
+  initialView: 'week',
+  availableViews: [],
+  use12: true,
+  showTimeMarker: false,
+  showTodayButton: false
+})
 
 // Create Vue App
 new Vue({

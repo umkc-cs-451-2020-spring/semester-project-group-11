@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Palette from '../views/Palette.vue'
 import FormFields from '../views/FormFields.vue'
-import Gantt from "../views/Gantt.vue";
+import Scheduler from "../views/Scheduler";
 
 
 Vue.use(VueRouter)
@@ -25,9 +25,9 @@ const routes = [
     component: FormFields
   },
   {
-    path: '/gantt',
-    name: 'Gantt',
-    component: Gantt
+    path: '/scheduler',
+    name: 'Scheduler',
+    component: Scheduler
   },
   {
     path: '/about',

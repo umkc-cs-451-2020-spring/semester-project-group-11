@@ -28,8 +28,16 @@ export default {
           link: '/'
         },
         {
-          name: 'Gantt',
-          link: '/gantt'
+          name: 'Scheduler',
+          link: '/scheduler'
+        },
+        {
+          name: 'Professors',
+          link: '#'
+        },
+        {
+          name: 'Requests',
+          link: '#'
         },
         {
           name: 'Palette',
@@ -50,6 +58,37 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~v-calendar-scheduler/scss/variables";
+/*
+  SCSS calendar changes
+*/
+$v-cal-event-bg: #02c39a;
+$v-cal-times-bg: #002f3f;
+$v-cal-time-block-bg:  #002f3f;
+$v-cal-time-block-hover-bg: #02c39a;
+$v-cal-times-border-color: rgb(64, 100, 115);
+$v-cal-day-border-color: rgb(64, 100, 115);
+$v-cal-times-bg: white;
+
+.v-cal {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+.v-cal-header {
+  display: none;
+}
+.v-cal-content {
+  border: none !important;
+}
+.v-cal-weekdays {
+  display: none !important;
+}
+
+.v-cal-times {
+  border-radius: .5rem 0 0 .5rem;
+}
+@import "~v-calendar-scheduler/scss/main";
+
 $leftWidth: 15rem;
 $dark: #1b262c;
 $blue-1: #022c43;

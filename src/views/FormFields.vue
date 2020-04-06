@@ -45,9 +45,9 @@ export default {
 $fieldHeight: 2.5rem;
 
 form {
-	display: grid;
-	grid-gap: 1rem;
-	width: min-content;
+	/*display: grid;*/
+	/*grid-gap: 1rem;*/
+	/*width: min-content;*/
 
 	input {
 		color: whitesmoke;
