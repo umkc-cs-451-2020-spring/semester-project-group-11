@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Palette from '../views/Palette.vue'
 import FormFields from '../views/FormFields.vue'
+import Gantt from "../views/Gantt.vue";
 
 
 Vue.use(VueRouter)
@@ -22,6 +23,11 @@ const routes = [
     path: '/form-fields',
     name: 'Form Fields',
     component: FormFields
+  },
+  {
+    path: '/gantt',
+    name: 'Gantt',
+    component: Gantt
   },
   {
     path: '/about',

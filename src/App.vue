@@ -28,6 +28,10 @@ export default {
           link: '/'
         },
         {
+          name: 'Gantt',
+          link: '/gantt'
+        },
+        {
           name: 'Palette',
           link: '/palette'
         },
