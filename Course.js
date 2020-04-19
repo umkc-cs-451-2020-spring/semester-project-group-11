@@ -1,14 +1,11 @@
 class Course {
-  constructor(id, professor, time, room) {
+  constructor(id, professor, start, length, room) {
     this.courseid = id;
     this.professor = professor;
-    this.time = time;
+    this.start = start;
+    this.length = length;
+    this.end = start + length;
     this.room = room;
-    this.violations = [];
-  }
-
-  add_violation(type, weight) {
-    this.violations.push(new Violation(type, weight));
   }
 
   print_course() {
@@ -17,17 +14,25 @@ class Course {
         this.courseid +
         "\nProfessor: " +
         this.professor.get_lastname() +
-        "\nTime: " +
-        this.print_time() +
+        "\nStart Time: " +
+        this.print_time(this.start) +
+        "\nEnd Time: " +
+        this.print_time(this.end) +
         "\nRoom: " +
         this.room
     );
   }
 
-  print_time() {
-    var str = (this.time / 100).toFixed(2).toString();
+  print_time(time) {
+    var str = (time / 100).toFixed(2);
     var split = str.split('.');
-    if (this.time < 1200) {
+    
+    if (parseInt(split[1]) >= 60) {
+      time += 40;
+      return this.print_time(time);
+    }
+
+    if (time < 1200) {
       var suffix = "am"
     }
     else {
@@ -48,8 +53,12 @@ class Course {
     return this.professor;
   }
 
-  get_time() {
-    return this.time;
+  get_start() {
+    return this.start;
+  }
+
+  get_end() {
+    return this.end;
   }
 
   get_room() {
