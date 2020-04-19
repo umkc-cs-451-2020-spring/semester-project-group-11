@@ -1,11 +1,12 @@
 class Course {
-  constructor(id, professor, start, length, room) {
+  constructor(id, professor, start, length, room, days) {
     this.courseid = id;
     this.professor = professor;
     this.start = start;
     this.length = length;
-    this.end = start + length;
+    this.end = this.set_end();
     this.room = room;
+    this.days = days;
   }
 
   print_course() {
@@ -18,6 +19,8 @@ class Course {
         this.print_time(this.start) +
         "\nEnd Time: " +
         this.print_time(this.end) +
+        "\nDays: " +
+        this.days +
         "\nRoom: " +
         this.room
     );
@@ -27,10 +30,11 @@ class Course {
     var str = (time / 100).toFixed(2);
     var split = str.split('.');
     
-    if (parseInt(split[1]) >= 60) {
-      time += 40;
-      return this.print_time(time);
-    }
+    // if (parseInt(split[1]) >= 60) {
+    //   time += 40;
+    //   this.set_time(time);
+    //   return this.print_time(time);
+    // }
 
     if (time < 1200) {
       var suffix = "am"
@@ -42,6 +46,17 @@ class Course {
       var suffix = "pm"
     }
     return split[0] + ":" + split[1] + suffix;
+  }
+
+  set_end() {
+    this.end = this.start + this.length;
+    var str = (this.end / 100).toFixed(2);
+    var split = str.split('.');
+    
+    if (parseInt(split[1]) >= 60) {
+      this.end += 40;
+    }
+    return this.end;
   }
 
   // Getters & Setters
@@ -63,6 +78,10 @@ class Course {
 
   get_room() {
     return this.room;
+  }
+
+  get_days() {
+    return this.days;
   }
 
   set_courseid(id) {

@@ -10,8 +10,8 @@ class Schedule {
     this.violations = [];
   }
 
-  add_course(id, professor, time, length, room) {
-    var course = new Course(id, professor, time, length, room);
+  add_course(id, professor, time, length, room, days) {
+    var course = new Course(id, professor, time, length, room, days);
     var s = this;
     if (professor.is_married()) {
       // check if their spouse has a class scheduled within an hour of this class
@@ -26,6 +26,10 @@ class Schedule {
       s.check_violations(course, item);
     });
     this.courses.push(course);
+    // Check if professor is tenured, then determine if they are teaching too many classes
+    if (professor.get_tenured()) {
+
+    }
   }
   
   add_marriage(professor1, professor2) {
@@ -46,8 +50,10 @@ class Schedule {
 
   check_violations(new_course, check_course) {
     var s = this;
-    s.check_timeProfessor(new_course, check_course);
-    s.check_timeRoom(new_course, check_course);
+    if (s.day_conflict(new_course, check_course)) {
+      s.check_timeProfessor(new_course, check_course);
+      s.check_timeRoom(new_course, check_course);
+    }
   }
 
   check_timeProfessor(new_course, check_course) {
@@ -98,14 +104,26 @@ class Schedule {
 
   time_conflict(course1, course2) {
     if ((course1.get_start() == course2.get_start()) ||
-        (course1.get_end() == course2.get_end()) ||
-        ((course1.get_start() > course2.get_start()) && 
-        (course1.get_start() < course2.get_end())) ||
-        ((course1.get_end() > course2.get_start()) &&
-        (course1.get_end() < course2.get_end()))) {
-          return true;
+      (course1.get_end() == course2.get_end()) ||
+      ((course1.get_start() > course2.get_start()) && 
+      (course1.get_start() < course2.get_end())) ||
+      ((course1.get_end() > course2.get_start()) &&
+      (course1.get_end() < course2.get_end()))) {
+        return true;
     }
     return false;
+  }
+
+  day_conflict(course1, course2) {
+    var conflict = false;
+    course1.get_days().forEach(function(item1) {
+      course2.get_days().forEach(function(item2) {
+        if (item1 == item2) {
+          conflict = true;
+        }
+      })
+    })
+    return conflict;
   }
 
   print_schedule() {
