@@ -10,8 +10,8 @@ class Schedule {
     this.violations = [];
   }
 
-  add_course(id, professor, time, room) {
-    var course = new Course(id, professor, time, room);
+  add_course(id, professor, time, length, room) {
+    var course = new Course(id, professor, time, length, room);
     var s = this;
     if (professor.is_married()) {
       // check if their spouse has a class scheduled within an hour of this class
@@ -51,8 +51,8 @@ class Schedule {
   }
 
   check_timeProfessor(new_course, check_course) {
-    if (
-      new_course.get_time() == check_course.get_time() &&
+    if ((this.time_conflict(new_course, check_course) || 
+      (this.time_conflict(check_course, new_course))) &&
       new_course.get_professor() == check_course.get_professor()
     ) {
       this.violations.push(
@@ -67,8 +67,8 @@ class Schedule {
   }
 
   check_timeRoom(new_course, check_course) {
-    if (
-      new_course.get_time() == check_course.get_time() &&
+    if ((this.time_conflict(new_course, check_course) || 
+      (this.time_conflict(check_course, new_course))) &&
       new_course.get_room() == check_course.get_room()
     ) {
       this.violations.push(
@@ -83,7 +83,7 @@ class Schedule {
   }
 
   check_marriage(new_course, check_course) {
-    if ((Math.abs(check_course.get_time() - new_course.get_time())) <= 100) {
+    if (this.time_conflict(new_course, check_course) || this.time_conflict(check_course, new_course)) {
       this.violations.push(
         new MarriageViolation(
           new_course.get_professor(),
@@ -94,6 +94,18 @@ class Schedule {
         )
       );
     }
+  }
+
+  time_conflict(course1, course2) {
+    if ((course1.get_start() == course2.get_start()) ||
+        (course1.get_end() == course2.get_end()) ||
+        ((course1.get_start() > course2.get_start()) && 
+        (course1.get_start() < course2.get_end())) ||
+        ((course1.get_end() > course2.get_start()) &&
+        (course1.get_end() < course2.get_end()))) {
+          return true;
+    }
+    return false;
   }
 
   print_schedule() {
