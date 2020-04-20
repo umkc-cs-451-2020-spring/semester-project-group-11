@@ -2,7 +2,7 @@
     <div id="page">
         <div class="head">
             <h1>Scheduler</h1>
-            <div class="button-group" style>
+            <div class="button-group">
                 <div></div>
                 <app-button>ADD COURSE</app-button>
             </div>

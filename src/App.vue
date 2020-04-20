@@ -35,54 +35,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~v-calendar-scheduler/scss/variables";
-/*
-  SCSS calendar changes
-*/
-$v-cal-event-bg: #02c39a;
-$v-cal-times-bg: #002f3f;
-$v-cal-time-block-bg:  #002f3f;
-$v-cal-time-block-hover-bg: #02c39a;
-$v-cal-times-border-color: rgb(64, 100, 115);
-$v-cal-day-border-color: rgb(64, 100, 115);
-$v-cal-times-bg: whitesmoke;
-
-.v-cal {
-  background-color: transparent !important;
-  padding: 0 !important;
-}
-.v-cal-header {
-  display: none;
-}
-.v-cal-content {
-  border: none !important;
-}
-.v-cal-weekdays {
-  display: none !important;
-}
-.v-cal-times {
-  border-radius: .5rem 0 0 .5rem;
-}
-.v-cal-dialog-card {
-  border-radius: .5rem;
-  background-color: #002f3f !important;
-  color: rgb(64, 100, 115);
-}
-.all-day {
-  display: none;
-}
-.v-cal-event-list {
-  width: 85%;
-}
-/*take out sunday saturday*/
-.v-cal-day--week:first-child {
-  display: none;
-}
-.v-cal-day--week:last-child {
-  display: none;
-}
-@import "~v-calendar-scheduler/scss/main";
-
 $leftWidth: 15rem;
 $dark: #1b262c;
 $blue-1: #022c43;
@@ -156,5 +108,61 @@ h1 {
   display: flex;
   justify-content: space-between;
 }
+
+
+/*
+-----------------------------------------------
+
+V Calendar SCSS
+
+-----------------------------------------------
+*/
+@import "~v-calendar-scheduler/scss/variables";
+/*
+  SCSS calendar changes
+*/
+$v-cal-event-bg: #02c39a;
+$v-cal-times-bg: #002f3f;
+$v-cal-time-block-bg:  #002f3f;
+$v-cal-time-block-hover-bg: #02c39a;
+$v-cal-times-border-color: rgb(64, 100, 115);
+$v-cal-day-border-color: rgb(64, 100, 115);
+$v-cal-times-bg: whitesmoke;
+
+.v-cal {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+.v-cal-header {
+  display: none;
+}
+.v-cal-content {
+  border: none !important;
+}
+.v-cal-weekdays {
+  display: none !important;
+}
+.v-cal-times {
+  border-radius: .5rem 0 0 .5rem;
+}
+.v-cal-dialog-card {
+  border-radius: .5rem;
+  background-color: #002f3f !important;
+  color: rgb(64, 100, 115);
+}
+.all-day {
+  display: none;
+}
+.v-cal-event-list {
+  width: 85%;
+}
+/*take out sunday saturday*/
+.v-cal-day--week:first-child {
+  display: none;
+}
+.v-cal-day--week:last-child {
+  display: none;
+}
+@import "~v-calendar-scheduler/scss/main";
 </style>
 

@@ -16,7 +16,7 @@ Vue.use(VueScheduler, {
   use12: true,
   showTimeMarker: false,
   showTodayButton: false,
-  disableDialog: true
+  disableDialog: false
 })
 
 // Create Vue App
