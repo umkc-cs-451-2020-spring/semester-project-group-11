@@ -1,0 +1,83 @@
+$leftWidth: 15rem;
+$dark: #1b262c;
+$blue-1: #022c43;
+$blue-2: #053f5e;
+$blue-3: #115173;
+$active: #ffd700;
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #011f2b;
+  // Firefox
+  :focus {outline:none;}
+  ::-moz-focus-inner {border:0;}
+}
+h1 {
+  font-size: 3.5rem;
+  color: #02c39a;
+  margin: 0;
+}
+h2 {
+  font-size: 2rem;
+  color: #02c39a;
+  margin: 0;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  #modal-background {
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: $leftWidth;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 90;
+  }
+  .left {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    width: $leftWidth;
+    background-image: linear-gradient(to bottom, #05668d, #02c39a);
+    .logo {
+      position: relative;
+      width: $leftWidth/2;
+      left: $leftWidth/4;
+    }
+  }
+  .content {
+    position: absolute;
+    left: $leftWidth;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+#page {
+  padding: 2rem;
+  .head {
+    margin-bottom: 2rem;
+  }
+}
+
+.nav-item {
+  text-align: left;
+  font-size: 2rem;
+  padding: 0 2rem;
+  a {
+    text-decoration: none;
+    color: white
+  }
+  a:hover {
+    color: $active;
+  }
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
