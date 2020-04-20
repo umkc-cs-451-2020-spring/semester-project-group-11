@@ -25,5 +25,10 @@
     }
 </script>
 
+<<<<<<< HEAD
 <style lang="scss">
 </style>
+=======
+<style lang="scss" scoped>
+</style>
+>>>>>>> 03dafce7e82e0e7f4e1317841ccf0209822697ed

@@ -14,31 +14,32 @@ export default {
 			default: '100%'
 		},
 		height: {
-			default: '10rem'
+			default: 'auto'
+		},
+		background: {
+			default: '#011f2b'
 		}
 	},
 
 	mounted() {
-		console.log(this.width)
-		console.log(this.stylish)
 	},
 
 	computed: {
 		stylish() {
 			return {
 				width: this.width,
-				height: this.height
+				height: this.height,
+				background: this.background
 			}
 		}
 	}
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .card {
 	min-height: 1rem;
 	min-width: 1rem;
-	background: #002f3f;
 	border-radius: .75rem;
 	padding: .5rem;
 }
