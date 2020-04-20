@@ -5,7 +5,9 @@
                 <h2>{{title}}</h2>
                 <span class="exit" @click="$store.commit('toggleModal')">&#10006;</span>
             </div>
-            <slot></slot>
+            <div class="modal-body">
+                <slot></slot>
+            </div>
         </card>
     </div>
 </template>
@@ -40,13 +42,16 @@
         .modal-head {
             display: flex;
             justify-content: space-between;
-            margin: 0 1rem;
+        }
+        .modal-body {
+            min-height: 3rem;
         }
         .exit {
             position: relative;
             height: 1rem;
             transform: scale(2);
-            top: .75rem;
+            top: .5rem;
+            right: .5rem;
             color: rgb(64, 100, 115);
         }
         .exit:hover {

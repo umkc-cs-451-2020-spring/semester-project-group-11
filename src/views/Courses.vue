@@ -1,9 +1,13 @@
 <template>
     <div id="page">
+        <!--    MODAL    -->
+        <app-modal v-if="$store.state.showModal" title="Add Course">
+        </app-modal>
+
+        <!--    PAGE HEAD    -->
         <div class="head">
             <h1>Courses</h1>
             <div class="button-group" style>
-                <div></div>
                 <app-button @click="add()">ADD COURSE</app-button>
             </div>
         </div>
@@ -15,11 +19,13 @@
 
 <script>
     import AppButton from "../components/AppButton";
+    import AppModal from "../components/AppModal";
 
     export default {
         name: 'Courses',
         components: {
-            AppButton
+            AppButton,
+            AppModal
         },
         data() {
             return {
@@ -27,7 +33,7 @@
         },
         methods: {
             add() {
-                // adding a course
+                this.$store.commit('toggleModal')
             }
         }
     }

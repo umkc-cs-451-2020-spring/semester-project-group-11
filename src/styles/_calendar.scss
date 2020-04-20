@@ -35,10 +35,11 @@ $v-cal-times-bg: whitesmoke;
 .v-cal-event-list {
   width: 85%;
 }
-/*take out sunday saturday*/
+/*SUNDAY*/
 .v-cal-day--week:first-child {
   display: none;
 }
+/*SATURDAY*/
 .v-cal-day--week:last-child {
   display: none;
 }

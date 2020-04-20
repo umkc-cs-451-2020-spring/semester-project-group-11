@@ -1,9 +1,13 @@
 $leftWidth: 15rem;
-$dark: #1b262c;
-$blue-1: #022c43;
-$blue-2: #053f5e;
-$blue-3: #115173;
-$active: #ffd700;
+
+$color-0: #1b262c;
+$color-1: #002f3f;
+$color-2: #05668d;
+$color-3: #02c39a;
+$color-4: #ffd700;
+
+$active: $color-4;
+$white: whitesmoke;
 
 
 body {
@@ -79,5 +83,11 @@ h2 {
 
 .button-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  * {
+    margin-right: 1rem;
+  }
+  *:last-child {
+    margin-right: 0;
+  }
 }

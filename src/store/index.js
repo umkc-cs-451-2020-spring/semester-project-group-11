@@ -9,7 +9,6 @@ export default new Vuex.Store({
   },
   mutations: {
     toggleModal(state) {
-      console.log('shit works')
       state.showModal = !state.showModal
     }
   },

@@ -14,7 +14,7 @@
         <div class="head">
             <h1>Scheduler</h1>
             <div class="button-group">
-                <div></div>
+                <app-button>SAVE SCHEDULE</app-button>
                 <app-button @click="addCourse">ADD COURSE</app-button>
             </div>
         </div>

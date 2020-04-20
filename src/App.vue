@@ -5,7 +5,7 @@
     <div class="left">
       <img alt="Vue logo" src="./assets/logo.png" class="logo">
       <div v-for="(item, index) in routes" :key="index" class="nav-item">
-        <router-link :to="item.path">{{item.name}}</router-link>
+        <router-link :to="item.path" @click.native="resetModal()">{{item.name}}</router-link>
       </div>
     </div>
 
@@ -34,6 +34,13 @@ export default {
 
   mounted() {
     this.routes = router.options.routes
+  },
+
+  methods: {
+    resetModal() {
+      if(this.$store.state.showModal)
+        this.$store.commit('toggleModal')
+    }
   }
 }
 </script>
