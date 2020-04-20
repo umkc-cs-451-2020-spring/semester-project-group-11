@@ -1,4 +1,4 @@
-class TimeProfessorViolation {
+export default class TimeProfessorViolation {
   constructor(professor, course1, course2, weight) {
     this.professor = professor;
     this.course1 = course1;
@@ -31,5 +31,3 @@ class TimeProfessorViolation {
     this.weight = weight;
   }
 }
-
-module.exports = TimeProfessorViolation;

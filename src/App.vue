@@ -123,8 +123,6 @@ h2 {
   justify-content: space-between;
 }
 
-
-<<<<<<< HEAD
 /*
 -----------------------------------------------
 
@@ -179,7 +177,7 @@ $v-cal-times-bg: whitesmoke;
   display: none;
 }
 @import "~v-calendar-scheduler/scss/main";
-=======
+
 /*FORMS*/
 $fieldHeight: 2.5rem;
 $formWidth: 30rem;
@@ -238,6 +236,5 @@ form {
     width: $formWidth
   }
 }
->>>>>>> 03dafce7e82e0e7f4e1317841ccf0209822697ed
 </style>
 

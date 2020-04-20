@@ -1,11 +1,10 @@
-var Schedule = require("./Schedule");
-var Professor = require("./Professor");
+import Schedule from "./Schedule";
+import Professor from "./Professor";
+let s = new Schedule();
 
-var s = new Schedule();
-
-var p1 = new Professor(1, "Kendall", "Bingham", false);
-var p2 = new Professor(2, "Brian", "Hare", true);
-var p3 = new Professor(3, "Cindy", "Bingham", false);
+let p1 = new Professor(1, "Kendall", "Bingham", false);
+let p2 = new Professor(2, "Brian", "Hare", true);
+let p3 = new Professor(3, "Cindy", "Bingham", false);
 
 s.add_course("CS451R", p1, 1400, 50, "EDU 117", ["M", "W", "F"]);
 s.add_course("CS441", p2, 1245, 145, "EDU 117", ["M", "W", "F"]);

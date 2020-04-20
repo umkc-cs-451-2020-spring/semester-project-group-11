@@ -1,4 +1,4 @@
-class Professor {
+export default class Professor {
     constructor(id, firstname, lastname, tenured) {
         this.id = id;
         this.first = firstname;
@@ -42,7 +42,7 @@ class Professor {
     }
 
     get_num_days() {
-        var num_days = 0;
+        let num_days = 0;
         if (this.monday) {
             num_days++;
         }
@@ -109,6 +109,3 @@ class Professor {
         this.tenured = tenured;
     }
   }
-  
-  module.exports = Professor;
-  

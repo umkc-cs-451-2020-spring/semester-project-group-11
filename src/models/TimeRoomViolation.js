@@ -1,4 +1,4 @@
-class TimeRoomViolation {
+export default class TimeRoomViolation {
   constructor(room, course1, course2, weight) {
     this.room = room;
     this.course1 = course1;
@@ -31,5 +31,3 @@ class TimeRoomViolation {
     this.weight = weight;
   }
 }
-
-module.exports = TimeRoomViolation;

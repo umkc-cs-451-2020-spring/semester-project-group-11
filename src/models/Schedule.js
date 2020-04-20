@@ -1,21 +1,21 @@
-var Professor = require("./Professor");
-var Course = require("./Course");
-var MarriageViolation = require("./MarriageViolation");
-var TimeProfessorViolation = require("./TimeProfessorViolation");
-var TimeRoomViolation = require("./TimeRoomViolation");
+import Professor from "./Professor";
+import Course from "./Course";
+import MarriageViolation from "./MarriageViolation";
+import TimeProfessorViolation from "./TimeProfessorViolation";
+import TimeRoomViolation from "./TimeRoomViolation";
 
-class Schedule {
+export default class Schedule {
   constructor() {
     this.courses = [];
     this.violations = [];
   }
 
   add_course(id, professor, time, length, room, days) {
-    var course = new Course(id, professor, time, length, room, days);
-    var s = this;
+    let course = new Course(id, professor, time, length, room, days);
+    let s = this;
     if (professor.is_married()) {
       // check if their spouse has a class scheduled within an hour of this class
-      var check_spouse = professor.get_spouse();
+      let check_spouse = professor.get_spouse();
       this.courses.forEach(function(item) {
         if (item.get_professor() == check_spouse) {
           s.check_marriage(course, item);
@@ -39,7 +39,7 @@ class Schedule {
 
   remove_marriage(professor) {
     if (professor.is_married()) {
-      spouse = professor.get_spouse();
+      let spouse = professor.get_spouse();
       professor.remove_marriage();
       spouse.remove_marriage();
     }
@@ -49,7 +49,7 @@ class Schedule {
   }
 
   check_violations(new_course, check_course) {
-    var s = this;
+    let s = this;
     if (s.day_conflict(new_course, check_course)) {
       s.check_timeProfessor(new_course, check_course);
       s.check_timeRoom(new_course, check_course);
@@ -115,7 +115,7 @@ class Schedule {
   }
 
   day_conflict(course1, course2) {
-    var conflict = false;
+    let conflict = false;
     course1.get_days().forEach(function(item1) {
       course2.get_days().forEach(function(item2) {
         if (item1 == item2) {
@@ -142,5 +142,3 @@ class Schedule {
     }
   }
 }
-
-module.exports = Schedule;

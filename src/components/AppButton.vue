@@ -20,11 +20,10 @@ button {
 	border: none !important;
 	background: #02c39a !important;
 	height: 1 + $fieldHeight !important;
-	width: 10rem !important;
 	color: whitesmoke !important;
 	font-size: 1.25rem !important;
 	font-weight: bold !important;
-	padding: .5rem !important;
+	padding: 1rem !important;
 	text-transform: capitalize !important;
 }
 button:hover {

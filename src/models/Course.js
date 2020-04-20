@@ -1,4 +1,4 @@
-class Course {
+export default class Course {
   constructor(id, professor, start, length, room, days) {
     this.courseid = id;
     this.professor = professor;
@@ -27,8 +27,8 @@ class Course {
   }
 
   print_time(time) {
-    var str = (time / 100).toFixed(2);
-    var split = str.split('.');
+    let str = (time / 100).toFixed(2);
+    let split = str.split('.');
     
     // if (parseInt(split[1]) >= 60) {
     //   time += 40;
@@ -37,21 +37,21 @@ class Course {
     // }
 
     if (time < 1200) {
-      var suffix = "am"
+      let suffix = "am"
     }
     else {
       if (split[0] != 12) {
         split[0] -= 12
       }
-      var suffix = "pm"
+      let suffix = "pm"
     }
     return split[0] + ":" + split[1] + suffix;
   }
 
   set_end() {
     this.end = this.start + this.length;
-    var str = (this.end / 100).toFixed(2);
-    var split = str.split('.');
+    let str = (this.end / 100).toFixed(2);
+    let split = str.split('.');
     
     if (parseInt(split[1]) >= 60) {
       this.end += 40;
@@ -100,5 +100,3 @@ class Course {
     this.room = room;
   }
 }
-
-module.exports = Course;
