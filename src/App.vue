@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div id="modal-background" v-if="$store.state.showModal"></div>
 
     <div class="left">
       <img alt="Vue logo" src="./assets/logo.png" class="logo">
@@ -26,6 +27,9 @@ export default {
     return {
       routes: []
     }
+  },
+
+  computed: {
   },
 
   mounted() {
@@ -104,12 +108,22 @@ h1 {
   color: #02c39a;
   margin: 0;
 }
+h2 {
+  font-size: 2rem;
+  color: #02c39a;
+  margin: 0;
+}
 
 #app {
   width: 100vw;
   height: 100vh;
   position: absolute;
-
+  #modal-background {
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: $leftWidth;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 90;
+  }
   .left {
     position: fixed;
     left: 0;
@@ -155,6 +169,66 @@ h1 {
 .button-group {
   display: flex;
   justify-content: space-between;
+}
+
+
+/*FORMS*/
+$fieldHeight: 2.5rem;
+$formWidth: 30rem;
+
+form {
+  width: $formWidth;
+  .field {
+    margin: .5rem 0;
+  }
+  input {
+    color: whitesmoke;
+    border-radius: .5rem;
+    border-color: transparent;
+    border-style: solid;
+    background: #002f3f;
+    width: $formWidth - 4.25rem;
+    height: $fieldHeight;
+    padding: .5rem 2rem;
+    font-size: 1.5rem;
+  }
+  textarea {
+    width: $formWidth - 4.25rem;
+    height: 15rem;
+    background: #002f3f;
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+    border-color: transparent;
+    border-style: solid;
+    font-size: 1.5rem;
+  }
+  textarea:focus {
+    border: 2px solid #02c39a;
+    color: whitesmoke;
+  }
+  input:focus {
+    outline-offset: 0;
+    border-color: #02c39a;
+    border-radius: .5rem;
+  }
+  select {
+    color: whitesmoke;
+    border-radius: .5rem;
+    border-color: transparent;
+    border-style: solid;
+    background: #002f3f;
+    width: $formWidth - 4.25rem;
+    height: 1 + $fieldHeight;
+    padding: .5rem 2rem;
+    font-size: 1.5rem;
+  }
+  select:focus {
+  }
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    width: $formWidth
+  }
 }
 </style>
 

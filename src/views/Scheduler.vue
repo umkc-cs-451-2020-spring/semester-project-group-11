@@ -1,10 +1,21 @@
 <template>
     <div id="page">
+        <app-modal v-if="$store.state.showModal" title="Add Course">
+            <form>
+                <input type="text" class="field" placeholder="Username">
+                <input type="password" class="field" placeholder="Password">
+                <textarea class="field"></textarea>
+                <div class="field">
+                    <app-button type="submit">SUBMIT</app-button>
+                </div>
+            </form>
+        </app-modal>
+
         <div class="head">
             <h1>Scheduler</h1>
             <div class="button-group" style>
                 <div></div>
-                <app-button>ADD COURSE</app-button>
+                <app-button @click="addCourse">ADD COURSE</app-button>
             </div>
         </div>
         <vue-scheduler
@@ -16,11 +27,13 @@
 
 <script>
     import AppButton from "../components/AppButton";
+    import AppModal from "../components/AppModal";
 
     export default {
         name: 'Scheduler',
         components: {
-            AppButton
+            AppButton,
+            AppModal
         },
         data() {
             return {
@@ -37,11 +50,14 @@
             }
         },
         methods: {
+            addCourse() {
+                this.$store.commit('toggleModal')
+            }
         },
         mounted() {
         }
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

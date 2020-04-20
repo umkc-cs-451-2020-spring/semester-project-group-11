@@ -1,5 +1,5 @@
 <template>
-	<button>
+	<button @click="$emit('click')">
 		<slot></slot>
 	</button>
 </template>
@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $fieldHeight: 2.5rem !important;
 
 button {
