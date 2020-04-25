@@ -1,11 +1,18 @@
 <template>
     <div id="page">
+        <!--    MODAL    -->
         <app-modal v-if="$store.state.showModal" title="Add Course">
-            <form>
-                <input type="text" class="field" placeholder="Username">
-                <input type="password" class="field" placeholder="Password">
-                <textarea class="field"></textarea>
-                <div class="field">
+            <form @submit="create()">
+                <input type="text" class="field" placeholder="Name">
+                <dropdown class="field" :options="professorOptions"></dropdown>
+                <input type="number" class="field" placeholder="start">'
+                <input type="number" class="field" placeholder="length">
+                <input type="text" class="field" placeholder="Room">
+                <dropdown :options="dayOptions"></dropdown>
+                <dropdown :options="booleanOptions"></dropdown>
+
+                <div class="button-group">
+                    <app-button @click="toggleModal()">CANCEL</app-button>
                     <app-button type="submit">SUBMIT</app-button>
                 </div>
             </form>
@@ -28,12 +35,14 @@
 <script>
     import AppButton from "../components/AppButton";
     import AppModal from "../components/AppModal";
+    import Dropdown from "../components/Dropdown";
 
     export default {
         name: 'Scheduler',
         components: {
             AppButton,
-            AppModal
+            AppModal,
+            Dropdown
         },
         data() {
             return {
@@ -46,15 +55,36 @@
                         startTime: "13:00",
                         endTime: "15:00",
                     }
+                ],
+                professors: [],
+            }
+        },
+        computed: {
+            professorOptions() {
+                return this.professors.map(p => {
+                    return {
+                        name: p.get_fullname(),
+                        code: p.get_id()
+                    }
+                })
+            },
+            dayOptions() {
+                return [
+                    {code: 'M', name: 'Monday'},
+                    {code: 'T', name: 'Tuesday'},
+                    {code: 'W', name: 'Wednesday'},
+                    {code: 'R', name: 'Thursday'},
+                    {code: 'F', name: 'Friday'},
                 ]
             }
         },
         methods: {
             addCourse() {
                 this.$store.commit('toggleModal')
+            },
+            create() {
+                return
             }
-        },
-        mounted() {
         }
     }
 </script>
