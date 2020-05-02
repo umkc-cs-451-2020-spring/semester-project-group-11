@@ -29,10 +29,10 @@ export default class Schedule {
     if (professor.get_tenured()) {
       // Check if the time is between the 10 and 3, if it is then there's an issue
       if ((course.time < 1000) || (course.time > 1500))
-          violation;
+          console.log('let violation; what was supposed to be hre');
       // Figure out how to check if all of a professor's courses are greater than 3 days
-      else if ((true))
-        true;
+      // else if ((true))
+      //   true;
     }
   }
   

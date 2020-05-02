@@ -88,6 +88,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	border: none;
+    width: 88%;
 }
  .custom-select__trigger {
 	position: relative;
