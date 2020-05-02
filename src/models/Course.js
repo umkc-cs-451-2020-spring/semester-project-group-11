@@ -35,15 +35,15 @@ export default class Course {
     //   this.set_time(time);
     //   return this.print_time(time);
     // }
-
+    let suffix
     if (time < 1200) {
-      let suffix = "am"
+      suffix = "am"
     }
     else {
       if (split[0] != 12) {
         split[0] -= 12
       }
-      let suffix = "pm"
+      suffix = "pm"
     }
     return split[0] + ":" + split[1] + suffix;
   }

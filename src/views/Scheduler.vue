@@ -46,6 +46,16 @@
         },
         data() {
             return {
+                events: [
+                    {
+                        date: new Date()
+                    },
+                    {
+                        date: new Date(),
+                        startTime: "13:00",
+                        endTime: "15:00",
+                    }
+                ],
                 courseForm: {
                     name: null,
                     professor: null,

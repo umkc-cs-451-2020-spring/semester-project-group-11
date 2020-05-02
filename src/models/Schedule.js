@@ -1,4 +1,3 @@
-import Professor from "./Professor";
 import Course from "./Course";
 import MarriageViolation from "./MarriageViolation";
 import TimeProfessorViolation from "./TimeProfessorViolation";
@@ -28,7 +27,7 @@ export default class Schedule {
     this.courses.push(course);
     // Check if professor is tenured, then determine if they are teaching too many classes
     if (professor.get_tenured()) {
-
+        console.log('Need to implement tenured')
     }
   }
   
