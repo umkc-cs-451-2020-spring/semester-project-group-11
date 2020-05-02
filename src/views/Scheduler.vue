@@ -106,28 +106,27 @@
                 this.$store.commit('toggleModal')
             },
             create() {
-                const professor = this.$store.state.professors.filter( (p) => p.id === this.form.code)[0]
+                // Add Event
                 const hourStart = new Date(`01 Jan 2018 ${this.form.start}`).getHours() // from datetime
-                const length = this.form.hours * 10 + this.form.minutes// from hours min
+                const minutes = this.form.hours * 60 + this.form.minutes// from hours min
+                this.events.push({
+                    date: this.dayByCode(this.form.day.code).date,
+                    startTime: hourStart,
+                    endTime: hourStart + (minutes / 60)
+                })
 
-                console.log()
-
-
-                console.log(professor, hourStart, length)
+                // Add to Schedule
+                const professor = this.$store.state.professors.filter( (p) => p.id === this.form.code)[0]
+                const start = hourStart * 10
+                const length = this.form.hours * 10 + this.form.minutes
                 this.$store.state.schedule.add_course(
                     this.form.id,
                     professor,
-                    hourStart * 10,
+                    start,
                     length,
                     this.form.room,
                     [this.form.day.code]
                 )
-
-                this.events.push({
-                    date: this.dayByCode(this.form.day.code).date,
-                    startTime: hourStart,
-                    endTime: hourStart + 1
-                })
             },
             selected() {
                 console.log('hello')
