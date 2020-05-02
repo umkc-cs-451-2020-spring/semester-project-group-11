@@ -71,7 +71,7 @@
             this.form = {
                 name: 'Databases',
                     professor: this.professorOptions[0],
-                    start: this.$store.state.days[0].date.hours(8),
+                    start: this.$store.state.days[0].date.hours(8).format('HH:mm:ss'),
                     hours: 1,
                     minutes: 15,
                     room: 'Haag 201',
