@@ -5,6 +5,7 @@ class Professor {
         this.last = lastname
         this.spouse = null;
         this.married = false;
+        this.tenured = false;
     }
 
     add_marriage(professor) {
@@ -16,8 +17,21 @@ class Professor {
         this.spouse = null;
         this.married = false;
     }
+    
+    add_tenure() {
+        this.tenured = true;
+    }
+    
+    remove_tenure() {
+        this.tenured = false;
+    }
   
     // Getters & Setters
+    
+    get_tenured() {
+        return this.tenured;
+    }
+    
     get_id() {
         return this.id;
     }
