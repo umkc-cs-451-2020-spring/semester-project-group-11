@@ -27,7 +27,12 @@ export default class Schedule {
     this.courses.push(course);
     // Check if professor is tenured, then determine if they are teaching too many classes
     if (professor.get_tenured()) {
-        console.log('Need to implement tenured')
+      // Check if the time is between the 10 and 3, if it is then there's an issue
+      if ((course.time < 1000) || (course.time > 1500))
+          violation;
+      // Figure out how to check if all of a professor's courses are greater than 3 days
+      else if ((true))
+        true;
     }
   }
   
