@@ -3,13 +3,13 @@
         <!--    MODAL    -->
         <app-modal v-if="$store.state.showModal" title="Add Course">
             <form @submit="create()">
-                <input type="text" class="field" placeholder="Name">
-                <dropdown class="field" :options="professorOptions"></dropdown>
-                <input type="number" class="field" placeholder="start">'
-                <input type="number" class="field" placeholder="length">
-                <input type="text" class="field" placeholder="Room">
-                <dropdown :options="dayOptions"></dropdown>
-                <dropdown :options="booleanOptions"></dropdown>
+                <input v-model="courseForm.name" type="text" class="field" placeholder="Name">
+                <dropdown v-model="courseForm.professor" class="field" :options="professorOptions"></dropdown>
+                <input v-model="courseForm.start" type="time" class="field" placeholder="Start">'
+                <input v-model="courseForm.hours" type="number" class="field" placeholder="Hours">
+                <input v-model="courseForm.minutes"  type="number" class="field" placeholder="Minutes">
+                <input v-model="courseForm.room" type="text" class="field" placeholder="Room">
+<!--                <dropdown v-model="courseForm.day" class="field" :options="$store.state.days" @input="selected()"></dropdown>-->
 
                 <div class="button-group">
                     <app-button @click="toggleModal()">CANCEL</app-button>
@@ -46,36 +46,25 @@
         },
         data() {
             return {
-                events: [
-                    {
-                        date: new Date()
-                    },
-                    {
-                        date: new Date(),
-                        startTime: "13:00",
-                        endTime: "15:00",
-                    }
-                ],
-                professors: [],
+                courseForm: {
+                    name: null,
+                    professor: null,
+                    start: null,
+                    hours: null,
+                    minutes: null,
+                    room: null,
+                    day: null
+                }
             }
         },
         computed: {
             professorOptions() {
-                return this.professors.map(p => {
+                return this.$store.state.professors.map(p => {
                     return {
                         name: p.get_fullname(),
                         code: p.get_id()
                     }
                 })
-            },
-            dayOptions() {
-                return [
-                    {code: 'M', name: 'Monday'},
-                    {code: 'T', name: 'Tuesday'},
-                    {code: 'W', name: 'Wednesday'},
-                    {code: 'R', name: 'Thursday'},
-                    {code: 'F', name: 'Friday'},
-                ]
             }
         },
         methods: {
@@ -83,7 +72,10 @@
                 this.$store.commit('toggleModal')
             },
             create() {
-                return
+                console.log(this.courseForm)
+            },
+            selected() {
+                console.log('hello')
             }
         }
     }

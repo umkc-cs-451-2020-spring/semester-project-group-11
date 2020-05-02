@@ -7,7 +7,7 @@
 			</div>
 		</div>
 		<div class="custom-options">
-			<span v-for="(option, index) in options" :key="index" data-value="option.code" class="custom-option">
+			<span v-for="(option, index) in options" :key="index" :data-value="option.code" class="custom-option">
 				{{option.name}}
 			</span>
 		</div>
@@ -26,26 +26,32 @@ export default {
 		},
 		placeholder: {
 			default: 'Select...'
+		},
+		value: {
+			default: null
 		}
 	},
 
 	mounted() {
-		document.querySelector('.custom-select-wrapper').addEventListener('click', function() {
-			this.querySelector('.custom-select').classList.toggle('open');
-		})
+		let self = this
 
+		document.querySelector('.custom-select-wrapper').addEventListener('click', function() {
+			this.querySelector('.custom-select').classList.toggle('open')
+		})
 
 		for (const option of document.querySelectorAll(".custom-option")) {
 			option.addEventListener('click', function() {
-				if (option.parentNode.querySelector('.custom-option.selected')) 
-					option.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+				if (option.parentNode.querySelector('.custom-option.selected'))
+					option.parentNode.querySelector('.custom-option.selected').classList.remove('selected')
 
+				// Select element option
 				option.classList.add('selected');
-				option.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
-				option.closest('.custom-select').querySelector('.custom-select__trigger span').classList.remove('placeholder');
+				option.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent
+				option.closest('.custom-select').querySelector('.custom-select__trigger span').classList.remove('placeholder')
+
+				self.updateCode(option.getAttribute('data-value'))
 			})
 		}
-
 
 		window.addEventListener('click', function(e) {
 			const select = document.querySelector('.custom-select')
@@ -56,19 +62,13 @@ export default {
 	},
 
 	methods: {
-		selectedOption(option) {
-			if (this.value) {
-				return option.code === this.value.code;
-			}
-			return false;
-		},
+		updateCode(code) {
+			const option = this.options.filter((option) => {
+				console.log(option.code, code, option)
+				return option.code === parseInt(code)
+			})[0]
 
-		change(e) {
-			const selectedCode = e.target.value;
-			const option = this.options.find((option) => {
-				return selectedCode === option.code;
-			});
-			this.$emit("input", option);
+			this.$emit("input", option)
 		}
 	}
 }
