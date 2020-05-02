@@ -90,7 +90,6 @@
                 endTime: "15:00",
                 name: 'Databases'
             })
-            console.log(this.events)
         },
         computed: {
             professorOptions() {
@@ -107,20 +106,36 @@
                 this.$store.commit('toggleModal')
             },
             create() {
-                const professor = this.$store.state.professors.filter( (p) => p.id = this.form.code)[0]
-                const time = 800 // from datetime
-                const length = 115 // from hours min
-                this.$store.schedule.add_course(
+                const professor = this.$store.state.professors.filter( (p) => p.id === this.form.code)[0]
+                const hourStart = new Date(`01 Jan 2018 ${this.form.start}`).getHours() // from datetime
+                const length = this.form.hours * 10 + this.form.minutes// from hours min
+
+                console.log()
+
+
+                console.log(professor, hourStart, length)
+                this.$store.state.schedule.add_course(
                     this.form.id,
                     professor,
-                    time,
+                    hourStart * 10,
                     length,
                     this.form.room,
                     [this.form.day.code]
                 )
+
+                this.events.push({
+                    date: this.dayByCode(this.form.day.code).date,
+                    startTime: hourStart,
+                    endTime: hourStart + 1
+                })
             },
             selected() {
                 console.log('hello')
+            },
+            dayByCode(code) {
+                return this.$store.state.days.filter(day => {
+                    return day.code === code
+                })[0]
             }
         }
     }
