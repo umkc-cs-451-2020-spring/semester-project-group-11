@@ -28,6 +28,7 @@
         <vue-scheduler
             :events="events"
             :disable-dialog="true"
+            event-display="name"
         ></vue-scheduler>
     </div>
 </template>
@@ -36,6 +37,7 @@
     import AppButton from "../components/AppButton";
     import AppModal from "../components/AppModal";
     import Dropdown from "../components/Dropdown";
+    import moment from "moment";
 
     export default {
         name: 'Scheduler',
@@ -48,12 +50,16 @@
             return {
                 events: [
                     {
-                        date: new Date()
-                    },
-                    {
-                        date: new Date(),
+                        date: new Date('01 Jan 2018'),
                         startTime: "13:00",
                         endTime: "15:00",
+                        name: 'Databases'
+                    },
+                    {
+                        date: new Date('03 Jan 2018'),
+                        startTime: "13:00",
+                        endTime: "15:00",
+                        name: 'Databases'
                     }
                 ],
                 form: {
@@ -71,12 +77,20 @@
             this.form = {
                 name: 'Databases',
                     professor: this.professorOptions[0],
-                    start: this.$store.state.days[0].date.hours(8).format('HH:mm:ss'),
+                    start: moment(this.$store.state.days[0].date).hours(8).format('HH:mm:ss'),
                     hours: 1,
                     minutes: 15,
                     room: 'Haag 201',
                     day: this.$store.state.days[0]
             }
+
+            this.events.push({
+                date: new Date('05 Jan 2018'),
+                startTime: "13:00",
+                endTime: "15:00",
+                name: 'Databases'
+            })
+            console.log(this.events)
         },
         computed: {
             professorOptions() {

@@ -12,6 +12,7 @@ Vue.use(VueScheduler, {
   maxDate: null,
   timeRange: [8, 18],
   initialView: 'week',
+  initialDate: new Date('01 Jan 2018'),
   availableViews: [],
   use12: true,
   showTimeMarker: false,
