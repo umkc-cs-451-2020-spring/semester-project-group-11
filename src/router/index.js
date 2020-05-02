@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Palette from '../views/Palette.vue'
 import Scheduler from "../views/Scheduler";
 import Professors from "../views/Professors";
+import Home from "../views/Home";
 
 
 Vue.use(VueRouter)
@@ -10,6 +11,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/scheduler',
     name: 'Scheduler',
     component: Scheduler
   },

@@ -3,13 +3,13 @@
         <!--    MODAL    -->
         <app-modal v-if="$store.state.showModal" title="Add Course">
             <form @submit="create()">
-                <input v-model="courseForm.name" type="text" class="field" placeholder="Name">
-                <dropdown v-model="courseForm.professor" class="field" :options="professorOptions"></dropdown>
-                <input v-model="courseForm.start" type="time" class="field" placeholder="Start">'
-                <input v-model="courseForm.hours" type="number" class="field" placeholder="Hours">
-                <input v-model="courseForm.minutes"  type="number" class="field" placeholder="Minutes">
-                <input v-model="courseForm.room" type="text" class="field" placeholder="Room">
-<!--                <dropdown v-model="courseForm.day" class="field" :options="$store.state.days" @input="selected()"></dropdown>-->
+                <input v-model="form.name" type="text" class="field" placeholder="Name">
+                <dropdown v-model="form.professor" class="field" :options="professorOptions"></dropdown>
+                <input v-model="form.start" type="time" class="field" placeholder="Start">'
+                <input v-model="form.hours" type="number" class="field" placeholder="Hours">
+                <input v-model="form.minutes"  type="number" class="field" placeholder="Minutes">
+                <input v-model="form.room" type="text" class="field" placeholder="Room">
+<!--                <dropdown v-model="form.day" class="field" :options="$store.state.days" @input="selected()"></dropdown>-->
 
                 <div class="button-group">
                     <app-button @click="toggleModal()">CANCEL</app-button>
@@ -56,7 +56,7 @@
                         endTime: "15:00",
                     }
                 ],
-                courseForm: {
+                form: {
                     name: null,
                     professor: null,
                     start: null,
@@ -65,6 +65,17 @@
                     room: null,
                     day: null
                 }
+            }
+        },
+        mounted() {
+            this.form = {
+                name: 'Databases',
+                    professor: this.professorOptions[0],
+                    start: this.$store.state.days[0].date.hours(8),
+                    hours: 1,
+                    minutes: 15,
+                    room: 'Haag 201',
+                    day: this.$store.state.days[0]
             }
         },
         computed: {
@@ -82,7 +93,17 @@
                 this.$store.commit('toggleModal')
             },
             create() {
-                console.log(this.courseForm)
+                const professor = this.$store.state.professors.filter( (p) => p.id = this.form.code)[0]
+                const time = 800 // from datetime
+                const length = 115 // from hours min
+                this.$store.schedule.add_course(
+                    this.form.id,
+                    professor,
+                    time,
+                    length,
+                    this.form.room,
+                    [this.form.day.code]
+                )
             },
             selected() {
                 console.log('hello')
