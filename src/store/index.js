@@ -17,6 +17,8 @@ export default new Vuex.Store({
       {code: 'W', name: 'Wednesday', date: new Date('03 Jan 2018')},
       {code: 'R', name: 'Thursday', date: new Date('04 Jan 2018')},
       {code: 'F', name: 'Friday', date: new Date('05 Jan 2018')},
+      {code: 'SA', name: 'Saturday', date: new Date('06 Jan 2018')},
+      {code: 'SU', name: 'Sunday', date: new Date('07 Jan 2018')},
     ],
     schedule: new Schedule(),
   },

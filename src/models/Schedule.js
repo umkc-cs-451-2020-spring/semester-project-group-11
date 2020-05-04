@@ -2,6 +2,7 @@ import Course from "./Course";
 import MarriageViolation from "./MarriageViolation";
 import TimeProfessorViolation from "./TimeProfessorViolation";
 import TimeRoomViolation from "./TimeRoomViolation";
+import TenureViolation from "./TenureViolation";
 
 export default class Schedule {
   constructor() {
@@ -29,10 +30,13 @@ export default class Schedule {
     if (professor.get_tenured()) {
       // Check if the time is between the 10 and 3, if it is then there's an issue
       if ((course.time < 1000) || (course.time > 1500))
-          console.log('let violation; what was supposed to be hre');
+        this.violations.push(new TenureViolation(professor, 3));
       // Figure out how to check if all of a professor's courses are greater than 3 days
-      // else if ((true))
-      //   true;
+      else if ((true))
+        professor.update_days(course.get_days());
+        if (professor.get_days() > 2) {
+          this.violations.push(new TenureViolation(professor, 4));
+        }
     }
   }
   
@@ -70,7 +74,7 @@ export default class Schedule {
           new_course.get_professor(),
           new_course,
           check_course,
-          3
+          5
         )
       );
     }
@@ -86,7 +90,7 @@ export default class Schedule {
           new_course.get_room(),
           new_course,
           check_course,
-          3
+          5
         )
       );
     }
@@ -100,7 +104,7 @@ export default class Schedule {
           check_course.get_professor(),
           new_course,
           check_course,
-          5 
+          3 
         )
       );
     }
