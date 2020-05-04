@@ -116,7 +116,7 @@
                 })
 
                 // Add to Schedule
-                const professor = this.$store.state.professors.filter( (p) => p.id === this.form.code)[0]
+                const professor = this.$store.state.professors.filter( (p) => p.id === this.form.professor.code)[0]
                 const start = hourStart * 10
                 const length = this.form.hours * 10 + this.form.minutes
                 this.$store.state.schedule.add_course(
@@ -127,6 +127,7 @@
                     this.form.room,
                     [this.form.day.code]
                 )
+                console.log(this.$store.state.schedule)
             },
             selected() {
                 console.log('hello')

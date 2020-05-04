@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from "vuex-persist"
 import Professor from "../models/Professor"
 import Schedule from "../models/Schedule"
 
@@ -35,5 +36,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-  }
+  },
+  plugins: [new VuexPersistence().plugin]
 })
