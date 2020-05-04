@@ -1,17 +1,16 @@
 <template>
-	<div class="custom-select-wrapper">
+	<div class="custom-select-wrapper" :id="dropdownID">
 		<div class="custom-select">
 			<div class="custom-select__trigger">
 				<span class="placeholder">{{placeholder}}</span>
-				<div class="arrow">
+				<div class="arrow"></div>
+			</div>
+			<div class="custom-options">
+				<span v-for="(option, index) in options" :key="index" :data-value="option.code" class="custom-option">
+					{{option.name}}
+				</span>
 			</div>
 		</div>
-		<div class="custom-options">
-			<span v-for="(option, index) in options" :key="index" :data-value="option.code" class="custom-option">
-				{{option.name}}
-			</span>
-		</div>
-	</div>
 	</div>
 </template>
 
@@ -28,28 +27,44 @@ export default {
 			default: 'Select...'
 		},
 		value: {
-			default: null
+			default: () => []
+		},
+		name: {
+			default: 'name'
+		},
+		multivalue: {
+			default: false,
+			type: Boolean
+		}
+	},
+	data() {
+		return {
+			selected: []
 		}
 	},
 
 	mounted() {
+		console.log('mounted', this.selected)
 		let self = this
 
-		document.querySelector('.custom-select-wrapper').addEventListener('click', function() {
+		// Open options
+		document.querySelector(`#${this.dropdownID}.custom-select-wrapper`).addEventListener('click', function() {
 			this.querySelector('.custom-select').classList.toggle('open')
 		})
 
-		for (const option of document.querySelectorAll(".custom-option")) {
+		// Options
+		for (const option of document.querySelectorAll(`#${this.dropdownID} .custom-option`)) {
 			option.addEventListener('click', function() {
+
 				if (option.parentNode.querySelector('.custom-option.selected'))
 					option.parentNode.querySelector('.custom-option.selected').classList.remove('selected')
 
 				// Select element option
-				option.classList.add('selected');
-				option.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent
-				option.closest('.custom-select').querySelector('.custom-select__trigger span').classList.remove('placeholder')
-
 				self.updateCode(option.getAttribute('data-value'))
+
+				option.classList.add('selected')
+				option.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = self.selected.map(option => option.name)
+				option.closest('.custom-select').querySelector('.custom-select__trigger span').classList.remove('placeholder')
 			})
 		}
 
@@ -61,14 +76,34 @@ export default {
 		});
 	},
 
+	computed: {
+		dropdownID() {
+			return 'dropdown-' + this.name
+		}
+	},
+
 	methods: {
 		updateCode(code) {
-			const option = this.options.filter((option) => {
-				console.log(option.code, code, option)
-				return option.code === parseInt(code)
-			})[0]
+			let codes = this.selected.map(option => option.code)
 
-			this.$emit("input", option)
+			if (this.multivalue && codes.length) {
+				codes.push(code)
+
+				this.selected = this.options.filter(option => {
+					return codes.some(code => this.hasCode(option, code))
+				})
+			}
+			else {
+				this.selected = this.options.filter(option => this.hasCode(option, code))
+			}
+
+			this.$emit("input", this.selected)
+		},
+		hasCode(option, code) {
+			if (typeof option.code === 'number')
+				return option.code === parseInt(code)
+			else
+				return option.code === code
 		}
 	}
 }

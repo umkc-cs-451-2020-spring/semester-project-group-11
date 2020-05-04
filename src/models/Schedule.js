@@ -22,9 +22,12 @@ export default class Schedule {
         }
       })
     }
-    this.courses.forEach(function(item) {
-      s.check_violations(course, item);
-    });
+
+    // @todo vvv make this work vvv
+    // this.courses.forEach(function(item) {
+    //   s.check_violations(course, item);
+    // });
+
     this.courses.push(course);
     // Check if professor is tenured, then determine if they are teaching too many classes
     if (professor.get_tenured()) {

@@ -6,6 +6,12 @@ import Schedule from "../models/Schedule"
 
 Vue.use(Vuex)
 
+const courseMilitaryTime = (time) => {
+  let hours = Math.floor(time / 100).toString()
+  let min = time.toString().slice(-2)
+  return `${hours}:${min}`
+}
+
 export default new Vuex.Store({
   state: {
     showModal: false,
@@ -25,14 +31,33 @@ export default new Vuex.Store({
   },
   getters: {
     events (state) {
-      state.schedule.courses.map( (course) => {
-          console.log(course)
+      let events = []
+
+      state.schedule.courses.forEach( (course) => {
+        let days = state.days.filter(day => course.days.includes(day.code))
+        days.forEach(day => {
+          let startTime = courseMilitaryTime(course.start)
+          let endTime = courseMilitaryTime(course.end)
+
+          events.push({
+            name: course.name,
+            date: day.date,
+            startTime,
+            endTime
+          })
+        })
+
       })
+
+      return events
     }
   },
   mutations: {
     toggleModal(state) {
       state.showModal = !state.showModal
+    },
+    deleteSchedule(state) {
+      state.schedule = new Schedule()
     }
   },
   actions: {
