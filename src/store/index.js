@@ -40,7 +40,7 @@ export default new Vuex.Store({
           let endTime = courseMilitaryTime(course.end)
 
           events.push({
-            name: course.name,
+            name: course.courseid,
             date: day.date,
             startTime,
             endTime

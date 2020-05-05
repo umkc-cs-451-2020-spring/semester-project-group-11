@@ -23,7 +23,7 @@
             <div class="button-group">
                 <app-button @click="$store.commit('deleteSchedule')">DELETE SCHEDULE</app-button>
                 <app-button @click="verify()">VERIFY</app-button>
-                <app-button @click="addCourse">ADD COURSE</app-button>
+                <app-button @click="$store.commit('toggleModal')">ADD COURSE</app-button>
             </div>
         </div>
         <vue-scheduler
@@ -82,28 +82,21 @@
             }
         },
         methods: {
-            addCourse() {
-                this.$store.commit('toggleModal')
-            },
             create() {
-                console.log(this.form)
                 const professor = this.$store.state.professors.filter( p => p.id === this.form.professor[0].code)[0]
                 const start = new Date(`01 Jan 2018 ${this.form.start}`).getHours() * 100
                 const length = this.form.hours * 100 + this.form.minutes
                 const days = this.form.days.map(day => day.code)
                 this.$store.state.schedule.add_course(
-                    this.form.id,
+                    this.form.name,
                     professor,
                     start,
                     length,
                     this.form.room,
                     days
                 )
-            },
-            dayByCode(code) {
-                return this.$store.state.days.filter(day => {
-                    return day.code === code
-                })[0]
+
+                this.$store.commit('toggleModal')
             },
             verify() {
 

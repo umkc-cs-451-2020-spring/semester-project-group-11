@@ -81,6 +81,14 @@ h2 {
   }
 }
 
+a {
+  text-decoration: none;
+  color: white
+}
+a:hover {
+  color: $active;
+}
+
 .button-group {
   display: flex;
   justify-content: flex-end;
