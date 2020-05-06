@@ -7,18 +7,26 @@ export default class TimeRoomViolation {
   }
 
   print_violation() {
-    console.log(
+    return (
       "Violation Type: Time-Room" +
-        "\nCourse 1: " +
-        this.course1.get_courseid() +
-        " (" + this.course1.print_time(this.course1.get_start()) + " - " + this.course1.print_time(this.course1.get_end()) + ")" +
-        "\nCourse 2: " +
-        this.course2.get_courseid() +
-        " (" + this.course2.print_time(this.course2.get_start()) + " - " + this.course2.print_time(this.course2.get_end()) + ")" +
-        "\nRoom: " +
-        this.room +
-        "\nWeight: " +
-        this.weight
+      "\nCourse 1: " +
+      this.course1.get_courseid() +
+      " (" +
+      this.course1.print_time(this.course1.get_start()) +
+      " - " +
+      this.course1.print_time(this.course1.get_end()) +
+      ")" +
+      "\nCourse 2: " +
+      this.course2.get_courseid() +
+      " (" +
+      this.course2.print_time(this.course2.get_start()) +
+      " - " +
+      this.course2.print_time(this.course2.get_end()) +
+      ")" +
+      "\nRoom: " +
+      this.room +
+      "\nWeight: " +
+      this.weight
     );
   }
 
