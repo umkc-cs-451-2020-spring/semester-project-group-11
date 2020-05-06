@@ -69,8 +69,9 @@ export default new Vuex.Store({
     removeViolations(state) {
       state.violations = null
     },
-    deleteProfessor(state, {id}) {
+    deleteProfessor(state, id) {
       state.professors = state.professors.filter(professor => professor.id !== id)
+      state.schedule.courses = state.schedule.courses.filter(course => course.professor.id !== id)
     },
     createProfessor(state, professor) {
       state.professors.push(professor)
@@ -85,6 +86,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getProfessor({state}, id) {
+      return state.professors.filter(professor => professor.id === id)[0]
+    }
   },
   modules: {
   },

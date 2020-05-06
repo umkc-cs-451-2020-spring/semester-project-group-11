@@ -44,8 +44,8 @@ export default {
 	},
 
 	mounted() {
-		console.log('mounted', this.selected)
 		let self = this
+		console.log(this.value)
 
 		// Open options
 		document.querySelector(`#${this.dropdownID}.custom-select-wrapper`).addEventListener('click', function() {
@@ -54,26 +54,14 @@ export default {
 
 		// Options
 		for (const option of document.querySelectorAll(`#${this.dropdownID} .custom-option`)) {
+			if (this.value[0])
+				if(this.value[0].code == option.getAttribute('data-value'))
+					this.updateOption(this, option)
+
 			option.addEventListener('click', function() {
-
-				if (option.parentNode.querySelector('.custom-option.selected'))
-					option.parentNode.querySelector('.custom-option.selected').classList.remove('selected')
-
-				// Select element option
-				self.updateCode(option.getAttribute('data-value'))
-
-				option.classList.add('selected')
-				option.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = self.selected.map(option => option.name)
-				option.closest('.custom-select').querySelector('.custom-select__trigger span').classList.remove('placeholder')
+				self.updateOption(self, option)
 			})
 		}
-
-		window.addEventListener('click', function(e) {
-			const select = document.querySelector('.custom-select')
-			if (!select.contains(e.target)) {
-				select.classList.remove('open');
-			}
-		});
 	},
 
 	computed: {
@@ -104,6 +92,17 @@ export default {
 				return option.code === parseInt(code)
 			else
 				return option.code === code
+		},
+		updateOption(self, option) {
+			if (option.parentNode.querySelector('.custom-option.selected'))
+				option.parentNode.querySelector('.custom-option.selected').classList.remove('selected')
+
+			// Select element option
+			self.updateCode(option.getAttribute('data-value'))
+
+			option.classList.add('selected')
+			option.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = self.selected.map(option => option.name)
+			option.closest('.custom-select').querySelector('.custom-select__trigger span').classList.remove('placeholder')
 		}
 	}
 }

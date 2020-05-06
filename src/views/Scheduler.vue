@@ -62,16 +62,6 @@
             }
         },
         mounted() {
-            this.form = {
-                name: 'Databases',
-                professor: this.professorOptions[0],
-                start: moment(this.$store.state.days[0].date).hours(8).format('HH:mm:ss'),
-                hours: 1,
-                minutes: 15,
-                room: 'Haag 201',
-                day: this.$store.state.days[0]
-            }
-
             setTimeout(() => {
                 this.$store.commit('updateViolations', ['hello world', 'I am a violation in the Scheduler.vue mounted method', 'there can be many violations', 'alot'])
             }, 2000)
