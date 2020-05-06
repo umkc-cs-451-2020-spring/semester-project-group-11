@@ -8,11 +8,14 @@ export default class Schedule {
   constructor() {
     this.courses = [];
     this.violations = [];
+    this.name = ''
   }
 
   add_course(id, professor, time, length, room, days) {
     let course = new Course(id, professor, time, length, room, days);
     let s = this;
+
+
     if (professor.is_married()) {
       // check if their spouse has a class scheduled within an hour of this class
       let check_spouse = professor.get_spouse();
@@ -32,11 +35,11 @@ export default class Schedule {
     // Check if professor is tenured, then determine if they are teaching too many classes
     if (professor.get_tenured()) {
       // Check if the time is between the 10 and 3, if it is then there's an issue
-      if (course.time < 1000 || course.time > 1500)
+      if (course.start < 1000 || course.end > 1500)
         this.violations.push(new TenureViolation(professor, 3));
       // Figure out how to check if all of a professor's courses are greater than 3 days
       else if (1 === 1) professor.update_days(course.get_days());
-      if (professor.get_days() > 2) {
+      if (professor.get_num_days() > 2) {
         this.violations.push(new TenureViolation(professor, 4));
       }
     }

@@ -4,6 +4,7 @@ import Palette from '../views/Palette.vue'
 import Scheduler from "../views/Scheduler";
 import Professors from "../views/Professors";
 import Home from "../views/Home";
+import Schedules from "../views/Schedules";
 
 
 Vue.use(VueRouter)
@@ -18,6 +19,11 @@ const routes = [
     path: '/scheduler',
     name: 'Scheduler',
     component: Scheduler
+  },
+  {
+    path: '/schedules',
+    name: 'Schedules',
+    component: Schedules
   },
   {
     path: '/professors',

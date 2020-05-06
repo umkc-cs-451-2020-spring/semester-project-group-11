@@ -80,7 +80,6 @@
 import AppButton from "../components/AppButton";
 import AppModal from "../components/AppModal";
 import Dropdown from "../components/Dropdown";
-import moment from "moment";
 
 export default {
   name: "Scheduler",
@@ -103,21 +102,13 @@ export default {
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.$store.commit("updateViolations", [
-        "hello world",
-        "I am a violation in the Scheduler.vue mounted method",
-        "there can be many violations",
-        "alot",
-      ]);
-    }, 2000);
   },
   computed: {
     professorOptions() {
       return this.$store.state.professors.map((p) => {
         return {
-          name: p.get_fullname(),
-          code: p.get_id(),
+          name: p.first + ' ' + p.last,
+          code: p.id,
         };
       });
     },
@@ -128,7 +119,8 @@ export default {
         (p) => p.id === this.form.professor[0].code
       )[0];
       const start = new Date(`01 Jan 2018 ${this.form.start}`).getHours() * 100;
-      const length = this.form.hours * 100 + this.form.minutes;
+      const length = parseInt(this.form.hours) * 100 + parseInt(this.form.minutes);
+      console.log(this.form, start, length)
       const days = this.form.days.map((day) => day.code);
       this.$store.state.schedule.add_course(
         this.form.name,

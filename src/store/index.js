@@ -87,7 +87,9 @@ export default new Vuex.Store({
     // Allows data to have class
     bindDataClasses(state) {
       state.professors = state.professors.map((professor, index) => {
-        return new Professor(index, professor.first, professor.last, professor.tenured, null)
+        let prof = new Professor(index, professor.first, professor.last, professor.tenured)
+        prof.spouse = professor.spouse
+        return prof
       })
       state.schedule.courses = state.schedule.courses.map((course, index) => {
         return new Course(index, course.courseid, course.start, course.length, course.room, course.days)
