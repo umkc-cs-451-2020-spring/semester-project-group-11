@@ -95,9 +95,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getProfessor({state}, id) {
-      return state.professors.filter(professor => professor.id === id)[0]
-    }
   },
   modules: {
   },

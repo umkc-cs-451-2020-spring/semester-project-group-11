@@ -25,7 +25,7 @@
 					</li>
 				</ul>
 			</card>
-
+w
 			<card width="50%">
 				<h2>Source Code</h2>
 				<a href="https://github.com/umkc-cs-451-2020-spring/semester-project-group-11/tree/app">Reports</a><br>

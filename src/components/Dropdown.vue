@@ -45,7 +45,6 @@ export default {
 
 	mounted() {
 		let self = this
-		console.log(this.value)
 
 		// Open options
 		document.querySelector(`#${this.dropdownID}.custom-select-wrapper`).addEventListener('click', function() {

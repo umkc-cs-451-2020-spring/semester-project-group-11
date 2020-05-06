@@ -2,7 +2,7 @@
     <div id="page">
         <!--    MODAL    -->
         <app-modal v-if="$store.state.showModal" title="Add Professor">
-            <form @submit="create()" v-if="!updating">
+            <form @submit.prevent="create()" v-if="!updating">
                 <input type="text" class="field" placeholder="First Name" v-model="form.first">
                 <input type="text" class="field" placeholder="Last Name" v-model="form.last">
                 <dropdown v-model="form.tenured" class="field" :options="booleanOptions" name="boolean" style="margin-bottom: 1rem"></dropdown>
@@ -14,7 +14,7 @@
                 </div>
             </form>
 
-            <form @submit="update()" v-if="updating">
+            <form @submit.prevent="update()" v-if="updating">
                 <input type="text" class="field" placeholder="First Name" v-model="form.first">
                 <input type="text" class="field" placeholder="Last Name" v-model="form.last">
                 <dropdown v-model="form.tenured" class="field" :options="booleanOptions" name="boolean-update" style="margin-bottom: 1rem"></dropdown>
@@ -22,7 +22,7 @@
 
                 <div class="button-group">
                     <app-button @click="toggleModal()">CANCEL</app-button>
-                    <app-button @click="update()">UPDATE</app-button>
+                    <app-button type="submit">UPDATE</app-button>
                 </div>
             </form>
         </app-modal>
@@ -31,7 +31,7 @@
         <div class="head">
             <h1>Professors</h1>
             <div class="button-group">
-                <app-button @click="toggleModal()">ADD PROFESSOR</app-button>
+                <app-button @click="createModal()">ADD PROFESSOR</app-button>
             </div>
         </div>
 
@@ -46,10 +46,10 @@
                     <th>Actions</th>
                 </tr>
                 <tr v-for="professor in $store.state.professors" :key="professor.last" >
-                    <td>{{professor.last }}</td>
-                    <td>{{professor.first }}</td>
-                    <td>{{professor.spouse }}</td>
-                    <td>{{professor.tenured }}</td>
+                    <td>{{ professor.last }}</td>
+                    <td>{{ professor.first }}</td>
+                    <td>{{ spouse(professor) }}</td>
+                    <td>{{ professor.tenured }}</td>
                     <td style="width: 15rem">
                         <span style="display: flex; justify-content: space-around">
                             <a @click="$store.commit('deleteProfessor', professor.id)">Delete</a>
@@ -93,9 +93,8 @@
         computed: {
             professorOptions() {
                 return this.$store.state.professors.map(p => {
-                    console.log(p.get_fullname())
                     return {
-                        name: p.get_fullname(),
+                        name: p.first + ' ' + p.last,
                         code: p.get_id()
                     }
                 })
@@ -115,23 +114,28 @@
             create() {
                 // Create a professor
                 let spouse = (this.form.spouse[0])
-                    ? this.$store.dispatch('getProfessor', this.form.spouse[0].code)
+                    ? this.getProfessor(this.form.spouse[0].code)
                     : null
-                let professor = new Professor(this.$store.state.professors.length, this.form.first, this.form.last, this.form.tenured[0].code, spouse)
+
+                let professor = new Professor(this.$store.state.professors.length, this.form.first, this.form.last, this.form.tenured[0].code)
+                professor.spouse = spouse
                 this.$store.commit('createProfessor', professor)
                 this.toggleModal()
             },
             update() {
                 // Update a professor
                 let spouse = (this.form.spouse[0])
-                    ? this.$store.dispatch('getProfessor', this.form.spouse[0].code)
+                    ? this.getProfessor(this.form.spouse[0].code)
                     : null
-                let professor = new Professor(this.updatingProfessor.id, this.form.first, this.form.last, this.form.tenured[0].code, spouse)
+
+                let professor = new Professor(this.updatingProfessor.id, this.form.first, this.form.last, this.form.tenured[0].code)
+                professor.spouse = spouse
                 this.$store.commit('updateProfessor', professor)
                 this.toggleModal()
             },
             updateModal(professor) {
                 this.toggleModal()
+                this.updating = true
 
                 this.updatingProfessor = professor
                 this.updating = true
@@ -139,7 +143,20 @@
                 this.form.last = professor.last
                 this.form.tenured = this.booleanOptions.filter(option => option.code == professor.tenured)
                 if(professor.spouse)
-                    this.form.spouse = this.professorOptions.filter(option => option.code === professor.spouse.id)[0]
+                    this.form.spouse = this.professorOptions.filter(option => option.code == professor.spouse.id)
+            },
+            createModal () {
+                this.toggleModal()
+                this.updating = false
+            },
+            spouse(professor) {
+                if (!professor.spouse)
+                    return ''
+
+                return professor.spouse.first + ' ' + professor.spouse.last
+            },
+            getProfessor(id) {
+                return this.$store.state.professors.filter(professor => professor.id === id)[0]
             }
         }
     }
