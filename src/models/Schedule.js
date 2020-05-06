@@ -13,32 +13,40 @@ export default class Schedule {
 
   add_course(id, professor, time, length, room, days) {
     let course = new Course(id, professor, time, length, room, days);
-    let s = this;
+    this.courses.push(course);
+  }
 
+  processCourseViolations(course) {
+    let professor = course.professor
 
     if (professor.is_married()) {
       // check if their spouse has a class scheduled within an hour of this class
       let check_spouse = professor.get_spouse();
-      this.courses.forEach(function(item) {
+      this.courses.forEach((item) => {
         if (item.get_professor() == check_spouse) {
-          s.check_marriage(course, item);
+          this.check_marriage(course, item);
         }
       });
     }
 
     // @todo vvv make this work vvv
-    // this.courses.forEach(function(item) {
-    //   s.check_violations(course, item);
-    // });
-
-    this.courses.push(course);
+    this.courses.forEach((item) => {
+      this.check_violations(course, item);
+    })
     // Check if professor is tenured, then determine if they are teaching too many classes
     if (professor.get_tenured()) {
       // Check if the time is between the 10 and 3, if it is then there's an issue
       if (course.start < 1000 || course.end > 1500)
         this.violations.push(new TenureViolation(professor, 3));
-      // Figure out how to check if all of a professor's courses are greater than 3 days
-      else if (1 === 1) professor.update_days(course.get_days());
+
+      // Update days
+      let profCourses = this.courses.filter(course => course.professor.id === professor.id);
+      let profDays = profCourses.reduce((days, course) => {
+        course.days.forEach(day => days.add(day))
+        return days
+      }, new Set())
+      professor.update_days(profDays)
+
       if (professor.get_num_days() > 2) {
         this.violations.push(new TenureViolation(professor, 4));
       }
@@ -162,6 +170,7 @@ export default class Schedule {
   }
 
   get_violations() {
+    this.courses.forEach(course => this.processCourseViolations(course))
     let str_violations = [];
     this.violations.forEach(function(item) {
       str_violations.push(item.print_violation());

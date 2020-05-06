@@ -92,8 +92,10 @@ export default new Vuex.Store({
         return prof
       })
       state.schedule.courses = state.schedule.courses.map((course, index) => {
-        return new Course(index, course.courseid, course.start, course.length, course.room, course.days)
+        let professor = state.professors.filter(prof => prof.id == course.professor.id)[0]
+        return new Course(course.courseid, professor, course.start, course.length, course.room, course.days)
       })
+      console.log(state.schedule.courses)
     }
   },
   actions: {
