@@ -35,7 +35,7 @@ export default class Schedule {
       if ((course.time < 1000) || (course.time > 1500))
         this.violations.push(new TenureViolation(professor, 3));
       // Figure out how to check if all of a professor's courses are greater than 3 days
-      else if ((true))
+      else if ((1===1))
         professor.update_days(course.get_days());
         if (professor.get_days() > 2) {
           this.violations.push(new TenureViolation(professor, 4));

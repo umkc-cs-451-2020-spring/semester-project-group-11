@@ -1,6 +1,12 @@
 <template>
   <div id="app">
     <div id="modal-background" v-if="$store.state.showModal"></div>
+    <div id="violations" v-if="$store.state.violations">
+      <span class="exit" @click="$store.commit('removeViolations')">&#10006;</span>
+      <div v-for="(violation, index) in $store.state.violations" :key="index">
+        {{violation}}
+      </div>
+    </div>
 
     <div class="left">
       <img alt="Vue logo" src="./assets/logo.png" class="logo">
@@ -25,7 +31,8 @@ export default {
 
   data() {
     return {
-      routes: []
+      routes: [],
+      violate: false
     }
   },
 

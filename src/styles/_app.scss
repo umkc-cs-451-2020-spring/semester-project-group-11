@@ -39,6 +39,32 @@ h2 {
     background: rgba(255, 255, 255, 0.2);
     z-index: 90;
   }
+  #violations {
+    transition: all .5s;
+    z-index: 100;
+    position: absolute;
+    bottom: 0; right: 10rem; left: $leftWidth + 10rem;
+    min-height: 5rem;
+    border-radius: .75rem .75rem 0 0;
+    background: #002f3f;
+    div {
+      margin: 1rem;
+      font-size: 125%;
+      color: $color-4;
+      text-align: center;
+    }
+    .exit {
+      position: absolute;
+      right: 0;
+      margin: 1rem;
+      color: rgb(64, 100, 115);
+      transform: scale(2);
+    }
+    .exit:hover {
+      cursor: pointer;
+      color: #02c39a;
+    }
+  }
   .left {
     position: fixed;
     left: 0;

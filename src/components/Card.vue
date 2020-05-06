@@ -17,7 +17,7 @@ export default {
 			default: 'auto'
 		},
 		background: {
-			default: '#002f3f'
+			default: '#011f2b'
 		}
 	},
 

@@ -14,10 +14,12 @@ const courseMilitaryTime = (time) => {
 
 export default new Vuex.Store({
   state: {
-    showModal: false,
     professors: [
         new Professor(1, 'Kendal', 'Bingahm', false)
     ],
+    schedule: new Schedule(),
+    violations: null,
+    showModal: false,
     days: [
       {code: 'M', name: 'Monday', date: new Date('01 Jan 2018')},
       {code: 'T', name: 'Tuesday', date: new Date('02 Jan 2018')},
@@ -27,7 +29,6 @@ export default new Vuex.Store({
       {code: 'SA', name: 'Saturday', date: new Date('06 Jan 2018')},
       {code: 'SU', name: 'Sunday', date: new Date('07 Jan 2018')},
     ],
-    schedule: new Schedule(),
   },
   getters: {
     events (state) {
@@ -58,6 +59,26 @@ export default new Vuex.Store({
     },
     deleteSchedule(state) {
       state.schedule = new Schedule()
+    },
+    updateViolations(state, newViolations) {
+      state.violations = newViolations
+    },
+    removeViolations(state) {
+      state.violations = null
+    },
+    deleteProfessor(state, {id}) {
+      state.professors = state.professors.filter(professor => professor.id !== id)
+    },
+    createProfessor(state, professor) {
+      state.professors.push(professor)
+    },
+    updateProfessor(state, updatedProfessor) {
+      state.professors = state.professors.map(professor => {
+        if (professor.id === updatedProfessor.id)
+          return updatedProfessor
+        else
+          return professor
+      })
     }
   },
   actions: {

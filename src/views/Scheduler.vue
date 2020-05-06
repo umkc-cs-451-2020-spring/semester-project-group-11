@@ -70,6 +70,10 @@
                 room: 'Haag 201',
                 day: this.$store.state.days[0]
             }
+
+            setTimeout(() => {
+                this.$store.commit('updateViolations', ['hello world', 'I am a violation in the Scheduler.vue mounted method', 'there can be many violations', 'alot'])
+            }, 2000)
         },
         computed: {
             professorOptions() {
