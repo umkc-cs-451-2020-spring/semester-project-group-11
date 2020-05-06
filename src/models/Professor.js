@@ -17,7 +17,6 @@ export default class Professor {
 
     update_days(days) {
         days.forEach(item => {
-            console.log(item)
             if (item == "M") {
                 this.monday = true;
             }

@@ -41,7 +41,7 @@ export default {
 
   mounted() {
     this.routes = router.options.routes
-    this.$store.commit('bindDataClasses')
+    this.$store.dispatch('bootstrap')
   },
 
   methods: {

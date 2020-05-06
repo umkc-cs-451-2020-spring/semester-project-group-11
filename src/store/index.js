@@ -67,6 +67,7 @@ export default new Vuex.Store({
     },
     removeViolations(state) {
       state.violations = null
+      state.schedule.violations = []
     },
     deleteProfessor(state, id) {
       state.professors = state.professors.filter(professor => professor.id !== id)
@@ -82,23 +83,21 @@ export default new Vuex.Store({
         else
           return professor
       })
-    },
-    // Used everytime vuex persist gets the object
-    // Allows data to have class
-    bindDataClasses(state) {
+    }
+  },
+  actions: {
+    // Local Storage Data converted to classes
+    bootstrap({state}) {
       state.professors = state.professors.map((professor, index) => {
         let prof = new Professor(index, professor.first, professor.last, professor.tenured)
         prof.spouse = professor.spouse
         return prof
       })
-      state.schedule.courses = state.schedule.courses.map((course, index) => {
+      state.schedule.courses = state.schedule.courses.map(course => {
         let professor = state.professors.filter(prof => prof.id == course.professor.id)[0]
         return new Course(course.courseid, professor, course.start, course.length, course.room, course.days)
       })
-      console.log(state.schedule.courses)
     }
-  },
-  actions: {
   },
   modules: {
   },
