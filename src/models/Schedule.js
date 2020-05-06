@@ -18,11 +18,12 @@ export default class Schedule {
 
   processCourseViolations(course) {
     let professor = course.professor
+    let courses = this.courses.filter(course => course.id !== course.id)
 
     if (professor.is_married()) {
       // check if their spouse has a class scheduled within an hour of this class
       let check_spouse = professor.get_spouse();
-      this.courses.forEach((item) => {
+      courses.forEach((item) => {
         if (item.get_professor() == check_spouse) {
           this.check_marriage(course, item);
         }
@@ -30,7 +31,7 @@ export default class Schedule {
     }
 
     // @todo vvv make this work vvv
-    this.courses.forEach((item) => {
+    courses.forEach((item) => {
       this.check_violations(course, item);
     })
     // Check if professor is tenured, then determine if they are teaching too many classes
