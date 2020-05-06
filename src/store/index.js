@@ -60,6 +60,9 @@ export default new Vuex.Store({
     deleteSchedule(state) {
       state.schedule = new Schedule()
     },
+    deleteCourse(state, courseID) {
+      state.schedule.courses = state.schedule.courses.filter(course => course.courseid !== courseID)
+    },
     updateViolations(state, newViolations) {
       state.violations = newViolations
     },

@@ -34,7 +34,7 @@
 <style lang="scss">
     #modal {
         position: absolute;
-        z-index: 100;
+        z-index: 90;
         top: 10rem;
         left: 15rem;
         right: 15rem;

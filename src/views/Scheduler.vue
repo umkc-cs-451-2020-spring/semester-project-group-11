@@ -30,6 +30,7 @@
             :events="$store.getters.events"
             :disable-dialog="true"
             event-display="name"
+            @event-clicked="deleteCourse"
         ></vue-scheduler>
     </div>
 </template>
@@ -74,6 +75,8 @@
             setTimeout(() => {
                 this.$store.commit('updateViolations', ['hello world', 'I am a violation in the Scheduler.vue mounted method', 'there can be many violations', 'alot'])
             }, 2000)
+
+
         },
         computed: {
             professorOptions() {
@@ -104,6 +107,9 @@
             },
             verify() {
 
+            },
+            deleteCourse(course) {
+                this.$store.commit('deleteCourse', course.name)
             }
         }
     }
