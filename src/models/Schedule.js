@@ -159,7 +159,7 @@ export default class Schedule {
   }
 
   get_violations() {
-    str_violations = [];
+    let str_violations = [];
     this.violations.forEach(function(item) {
       str_violations.push(item.print_violation());
     });

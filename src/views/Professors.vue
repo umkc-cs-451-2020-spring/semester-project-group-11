@@ -48,8 +48,8 @@
                 <tr v-for="professor in $store.state.professors" :key="professor.last" >
                     <td>{{professor.last }}</td>
                     <td>{{professor.first }}</td>
-                    <td>{{professor.get_spouse() }}</td>
-                    <td>{{professor.get_tenured() }}</td>
+                    <td>{{professor.spouse }}</td>
+                    <td>{{professor.tenured }}</td>
                     <td style="width: 15rem">
                         <span style="display: flex; justify-content: space-around">
                             <a @click="$store.commit('deleteProfessor', professor.id)">Delete</a>
@@ -93,6 +93,7 @@
         computed: {
             professorOptions() {
                 return this.$store.state.professors.map(p => {
+                    console.log(p.get_fullname())
                     return {
                         name: p.get_fullname(),
                         code: p.get_id()
@@ -114,19 +115,19 @@
             create() {
                 // Create a professor
                 let spouse = (this.form.spouse[0])
-                    ? $store.dispatch('getProfessor', this.form.spouse[0].code)
+                    ? this.$store.dispatch('getProfessor', this.form.spouse[0].code)
                     : null
-                let professor = new Professor($store.state.professors.length, this.form.first, this.form.last, this.form.tenured[0].code, spouse)
-                $store.commit('createProfessor', professor)
+                let professor = new Professor(this.$store.state.professors.length, this.form.first, this.form.last, this.form.tenured[0].code, spouse)
+                this.$store.commit('createProfessor', professor)
                 this.toggleModal()
             },
             update() {
                 // Update a professor
                 let spouse = (this.form.spouse[0])
-                    ? $store.dispatch('getProfessor', this.form.spouse[0].code)
+                    ? this.$store.dispatch('getProfessor', this.form.spouse[0].code)
                     : null
                 let professor = new Professor(this.updatingProfessor.id, this.form.first, this.form.last, this.form.tenured[0].code, spouse)
-                $store.commit('updateProfessor', professor)
+                this.$store.commit('updateProfessor', professor)
                 this.toggleModal()
             },
             updateModal(professor) {

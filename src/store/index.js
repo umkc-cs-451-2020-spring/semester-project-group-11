@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import VuexPersistence from "vuex-persist"
 import Professor from "../models/Professor"
 import Schedule from "../models/Schedule"
+import Course from "../models/Course";
 
 Vue.use(Vuex)
 
@@ -14,9 +15,7 @@ const courseMilitaryTime = (time) => {
 
 export default new Vuex.Store({
   state: {
-    professors: [
-        new Professor(1, 'Kendal', 'Bingahm', false)
-    ],
+    professors: [],
     schedule: new Schedule(),
     violations: null,
     showModal: false,
@@ -82,6 +81,16 @@ export default new Vuex.Store({
           return updatedProfessor
         else
           return professor
+      })
+    },
+    // Used everytime vuex persist gets the object
+    // Allows data to have class
+    bindDataClasses(state) {
+      state.professors = state.professors.map((professor, index) => {
+        return new Professor(index, professor.first, professor.last, professor.tenured, null)
+      })
+      state.schedule.courses = state.schedule.courses.map((course, index) => {
+        return new Course(index, course.courseid, course.start, course.length, course.room, course.days)
       })
     }
   },
