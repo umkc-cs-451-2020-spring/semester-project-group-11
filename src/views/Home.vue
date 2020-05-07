@@ -18,14 +18,14 @@
 				<h2>User Notes</h2>
 				<ul style="color: whitesmoke">
 					<li>
-						This app can save your schedule from previous sessions, but if you choose to delete your browsers local storage.
+						Data is stored in your browsers local storage. If you delete the application data then your data will be lost
 					</li>
 					<li>
-						Additionally, this app will not load previous data if you try to load the website in a private tab.
+						Private tabs will save your data
 					</li>
 				</ul>
 			</card>
-w
+
 			<card width="50%">
 				<h2>Source Code</h2>
 				<a href="https://github.com/umkc-cs-451-2020-spring/semester-project-group-11/tree/app">Reports</a><br>
