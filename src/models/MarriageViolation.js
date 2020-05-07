@@ -7,6 +7,11 @@ export default class MarriageViolation {
     this.weight = weight;
   }
 
+  equal(violation) {
+    if (!violation.constructor.name === this.constructor.name)
+      return false
+  }
+
   print_violation() {
     return (
       "Violation Type: Marriage" +

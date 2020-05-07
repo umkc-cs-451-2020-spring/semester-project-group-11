@@ -20,8 +20,8 @@
                     <td>{{ index }}</td>
                     <td style="width: 15rem">
                         <span style="display: flex; justify-content: space-around">
-                            <a @click="$store.commit('deleteProfessor', professor.id)">Delete</a>
-                            <a>Update</a>
+                            <a @click="$store.commit('deleteSchedule', index)">Delete</a>
+                            <a @click="$store.dispatch('viewSchedule', schedule)">View</a>
                         </span>
                     </td>
 

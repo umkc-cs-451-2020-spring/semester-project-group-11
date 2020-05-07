@@ -4,6 +4,7 @@ import VuexPersistence from "vuex-persist"
 import Professor from "../models/Professor"
 import Schedule from "../models/Schedule"
 import Course from "../models/Course";
+import router from "../router";
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   state: {
     professors: [],
     schedule: new Schedule(),
+    schedules: [],
     violations: null,
     showModal: false,
     days: [
@@ -56,8 +58,11 @@ export default new Vuex.Store({
     toggleModal(state) {
       state.showModal = !state.showModal
     },
-    deleteSchedule(state) {
-      state.schedule = new Schedule()
+    saveSchedule(state) {
+      state.schedules.push(state.schedule)
+    },
+    deleteSchedule(state, index) {
+      state.schedules = state.schedules.filter((other, otherIndex) => otherIndex !== index)
     },
     deleteCourse(state, courseID) {
       state.schedule.courses = state.schedule.courses.filter(course => course.courseid !== courseID)
@@ -87,19 +92,41 @@ export default new Vuex.Store({
   },
   actions: {
     // Local Storage Data converted to classes
-    bootstrap({state}) {
+    bootstrap({state, dispatch}) {
       state.professors = state.professors.map((professor, index) => {
         let prof = new Professor(index, professor.first, professor.last, professor.tenured)
         prof.spouse = professor.spouse
         return prof
       })
-      state.schedule.courses = state.schedule.courses.map(course => {
+
+      dispatch('bindSchedule')
+    },
+    bindSchedule({state}) {
+      let courses = state.schedule.courses
+      state.schedule = new Schedule()
+      state.schedule.courses = courses.map(course => {
         let professor = state.professors.filter(prof => prof.id == course.professor.id)[0]
         return new Course(course.courseid, professor, course.start, course.length, course.room, course.days)
       })
-    }
+    },
+    marry(context, {professor, spouse}) {
+      if (!spouse || !professor)
+        return
+
+      professor.add_marriage(spouse)
+      spouse.add_marriage(professor)
+    },
+    viewSchedule({state, dispatch}, schedule) {
+      state.schedule = schedule
+      dispatch('bindSchedule')
+      router.push('/scheduler')
+    },
   },
   modules: {
   },
-  plugins: [new VuexPersistence().plugin]
+  plugins: [
+      new VuexPersistence({
+        supportCircular: true
+      }).plugin
+  ]
 })

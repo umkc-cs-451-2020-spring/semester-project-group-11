@@ -45,7 +45,7 @@
                     <th>Tenured</th>
                     <th>Actions</th>
                 </tr>
-                <tr v-for="professor in $store.state.professors" :key="professor.last" >
+                <tr v-for="(professor, index) in $store.state.professors" :key="index" >
                     <td>{{ professor.last }}</td>
                     <td>{{ professor.first }}</td>
                     <td>{{ spouse(professor) }}</td>
@@ -95,7 +95,7 @@
                 return this.$store.state.professors.map(p => {
                     return {
                         name: p.first + ' ' + p.last,
-                        code: p.get_id()
+                        code: p.id
                     }
                 })
             }
@@ -118,7 +118,7 @@
                     : null
 
                 let professor = new Professor(this.$store.state.professors.length, this.form.first, this.form.last, this.form.tenured[0].code)
-                professor.spouse = spouse
+                this.$store.dispatch('marry', {professor, spouse})
                 this.$store.commit('createProfessor', professor)
                 this.toggleModal()
             },
@@ -129,7 +129,7 @@
                     : null
 
                 let professor = new Professor(this.updatingProfessor.id, this.form.first, this.form.last, this.form.tenured[0].code)
-                professor.spouse = spouse
+                this.$store.dispatch('marry', {professor, spouse})
                 this.$store.commit('updateProfessor', professor)
                 this.toggleModal()
             },

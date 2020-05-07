@@ -18,22 +18,30 @@ export default class Schedule {
 
   processCourseViolations(course) {
     let professor = course.professor
-    let courses = this.courses.filter(course => course.id !== course.id)
+    let courses = this.courses.filter(other => other.courseid !== course.courseid) // courses to check against
 
-    if (professor.is_married()) {
-      // check if their spouse has a class scheduled within an hour of this class
-      let check_spouse = professor.get_spouse();
-      courses.forEach((item) => {
-        if (item.get_professor() == check_spouse) {
-          this.check_marriage(course, item);
-        }
-      });
-    }
-
-    // @todo vvv make this work vvv
     courses.forEach((item) => {
       this.check_violations(course, item);
     })
+
+    // Marriage hour apart constraint
+    if (professor.spouse !== null) {
+      let hourBehind = course.start - 100
+      let hourAhead = course.end + 100
+      let nearCourses = courses.filter(course => {
+        let startedWithinHour = course.start > hourAhead && course.start < hourBehind
+        let endedWithinHour = course.end > hourBehind && course.end < hourAhead
+        return startedWithinHour || endedWithinHour
+      })
+
+      nearCourses.forEach(near => {
+        // Spouse works near
+        // @todo violation duplication
+        if (near.professor.id === professor.spouse.id)
+          this.violations.push(new MarriageViolation(near.professor, professor, near, course, 3))
+      })
+    }
+
     // Check if professor is tenured, then determine if they are teaching too many classes
     if (professor.get_tenured()) {
       // Check if the time is between the 10 and 3, if it is then there's an issue

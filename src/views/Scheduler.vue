@@ -58,8 +58,8 @@
     <div class="head">
       <h1>Scheduler</h1>
       <div class="button-group">
-        <app-button @click="$store.commit('deleteSchedule')"
-          >DELETE SCHEDULE</app-button
+        <app-button @click="$store.commit('saveSchedule')"
+          >SAVE</app-button
         >
         <app-button @click="verify()">VERIFY</app-button>
         <app-button @click="$store.commit('toggleModal')"
